@@ -5,6 +5,7 @@ This project is a continuation of our [database groups final project](https://gi
 
 ### Project Goals:
 - Add dynamic updates/create modals which allow the user to update/create any information related to their update. (Can create a new address when creating a new employee...)
+- Add role based users
 - Create a working reservations system
 - Search feature on every view with auto-complete
 - Further abstract tables using Higher Order Components
