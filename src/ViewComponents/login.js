@@ -11,10 +11,10 @@ class Login extends Component {
         super(props)
     
         /** State variables:
-         * - email: the email for the login credentials. Initally set to empty
-         * - password: the password for the login credentials. Initally set to empty
-         * - message: a string that tells the user if their log in cradentials were wrong.
-         *    Message is initally empty and will only change if the server fails to log the user in
+         * - email: the email for the login credentials. Initially set to empty
+         * - password: the password for the login credentials. Initially set to empty
+         * - message: a string that tells the user if their log in credentials were wrong.
+         *    Message is initially empty and will only change if the server fails to log the user in
          */     
         this.state = {
           email: "",
@@ -36,7 +36,7 @@ class Login extends Component {
 
 
     /**
-     * Handels the changing of state variables.
+     * Handles the changing of state variables.
      * @param  {[Javascript Event]} event the event associated with the listener.
     */
     handleChange(event) {
@@ -50,7 +50,7 @@ class Login extends Component {
      * Handles the form submission. this function checks if the input fields are
      * valid for the login to continue. If they are not then does not validate the
      * input fields
-     * @param  {[Javascript Event]} event the event associated witht the listener
+     * @param  {[Javascript Event]} event the event associated with the listener
     */
     handleSubmit(event) {
         event.preventDefault();
@@ -63,7 +63,7 @@ class Login extends Component {
 
          // Links for bottom of page
          const reactLink = <a href="https://reactjs.org/">React</a>
-         const fontAwLink = <a href="https://fontawesome.com/">Font Awsome</a>
+         const fontAwLink = <a href="https://fontawesome.com/">Font Awesome</a>
          const bootLink = <a href="https://getbootstrap.com/">Bootstrap</a>
 
         return (
@@ -73,14 +73,14 @@ class Login extends Component {
                 </div>
                 <div className="App-header">
                     <div className="d-flex justify-content-center">
-                        <img src={ABCLogo} class="img-fluid" alt="Responsive"/>
+                        <img src={ABCLogo} className="img-fluid" alt="Responsive"/>
                     </div>
                     <div className="row justify-content-center">
                         <div className="flex-container" id="login_container">
                             <div className="row justify-content-center">
                                 <div className="login m-3">
                                     <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
-                                        <h5 className="d-flex justify-content-center"id='info-text'>Log In</h5>
+                                        <h5 className="d-flex justify-content-center" id='info-text'>Log In</h5>
                                         <hr />
                                         <div className="form-group">
                                             <div className="input-group">
@@ -91,7 +91,7 @@ class Login extends Component {
 
                                             </div>
                                             <div className="d-flex justify-content-center mb-3">
-                                                <small id="emailHelp" className="form-text" id='info-text'>We'll never share your email with anyone else.</small>
+                                                <small className="form-text" id='info-text'>We'll never share your email with anyone else.</small>
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -122,7 +122,6 @@ class Login extends Component {
                         <p>Developed with {this.heartIcon} and {this.javaIcon} using {bootLink}, {reactLink}, and {fontAwLink}</p>
                     </div>
                 </div>
-                
             </div>
         )
     }

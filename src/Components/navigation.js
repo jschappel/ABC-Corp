@@ -18,8 +18,8 @@ class Navigation extends Component {
     }
 
     /**
-   * Handles the Bootstrap navbars hide and show effects for the collapse navabr (When the screen ). 
-   * @param  {Javascript Event} event the event associated witht the listener
+   * Handles the Bootstrap navbars hide and show effects for the collapse navbar (When the screen ). 
+   * @param  {Javascript Event} event the event associated with the listener
    * @return none
    */
     toggleMenu(event){
@@ -51,7 +51,7 @@ class Navigation extends Component {
                             <NavLink className='nav-link' to='/employee'>Employees</NavLink>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
+                    <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <NavLink className='nav-link' to='/' exact>Account Settings</NavLink>
                         </li>
