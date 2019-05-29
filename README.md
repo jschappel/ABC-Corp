@@ -18,7 +18,7 @@ This project is a continuation of our [database groups final project](https://gi
 - Use Programmed Queries or an ORM for server querying
 - Refactor and Abstract files so that futures additions can be done with ease  
 
-### Create-React-App Instructions
+## Create-React-App Instructions
 Create React App is a pre-built boilerplate for React applications. It saves you from having to manually install everything. Additional instructions can also be found [here](https://facebook.github.io/create-react-app/docs/getting-started)
 1) Open CMD and type the following: npm install -g create-react-app
 2) Create a folder on your computer to store your react programs in
