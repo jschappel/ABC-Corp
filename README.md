@@ -5,7 +5,7 @@ This project is a continuation of our [database groups final project](https://gi
 
 ## Project Goals:
 
-### Front End:
+#### Front End:
 - Add dynamic updates/create modals which allow the user to update/create any information related to their update. (Can create a new address when creating a new employee...)
 - Add role based users
 - Create a working reservations system
@@ -13,10 +13,10 @@ This project is a continuation of our [database groups final project](https://gi
 - Further abstract tables using Higher Order Components
 - Create smooth CSS transitions between views and modals
 
-### Back End:
+#### Back End:
 - Use GraphQL instead of REST as websites API
 - Use Programmed Queries or an ORM for server querying
-- Refactor and Abstract files so that futures additions can be done with ease  
+- Refactor and Abstract files so that future additions can be done with ease  
 
 ## Create-React-App Instructions
 Create React App is a pre-built boilerplate for React applications. It saves you from having to manually install everything. Additional instructions can also be found [here](https://facebook.github.io/create-react-app/docs/getting-started)
