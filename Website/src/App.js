@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Home from './ViewComponents/home'
-import Login from './ViewComponents/login'
-import Employee from './ViewComponents/employee'
-import NotFound from './ViewComponents/404Page'
-import Inventory from './ViewComponents/inventory'
+import Home from './Components/Views/home'
+import Login from './Components/Views/login'
+import Employee from './Components/Views/employee'
+import NotFound from './Components/Views/404Page'
+import Inventory from './Components/Views/inventory'
 
 
 class App extends Component {

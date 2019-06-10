@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navigation from '../Components/navigation'
+import Navigation from '../Navbars/navigation'
 
 
 class Employee extends Component {

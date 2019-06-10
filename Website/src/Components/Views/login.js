@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ABCLogo from '../Images/ABCLogo2.png'
+import ABCLogo from '../../Images/ABCLogo2.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import '../App.css'
+import '../../CSS/App.css'
 
 
 

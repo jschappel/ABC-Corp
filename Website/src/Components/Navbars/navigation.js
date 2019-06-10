@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {NavLink} from 'react-router-dom'
-import ABCLogo from '../Images/ABCLogo2.png'
+import ABCLogo from '../../Images/ABCLogo2.png'
 
 class Navigation extends Component {
 

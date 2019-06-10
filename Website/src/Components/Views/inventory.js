@@ -1,26 +1,24 @@
 import React, { Component } from 'react'
-import Navigation from '../Components/navigation'
+import Navigation from '../Navbars/navigation'
 
 
-class Home extends Component {
+class Inventory extends Component {
 
     constructor(props){
         super(props)
-
 
         this.userInfo = this.props.rest
     }
 
 
-    render(){
+    render() {
         console.log(this.userInfo)
-
         return (
             <div>
                 <Navigation />
-                <p>This is the home page</p>
+                <p>This is the Inventory page</p>
             </div>
         )
-    }    
+    }
 }
-export default Home
+export default Inventory
