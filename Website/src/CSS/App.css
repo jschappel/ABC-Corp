@@ -1,13 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-header {
   /*background-color: #282c34; */
   min-height: 90vh;
@@ -22,6 +12,28 @@
   color: #60b0f4;
 }
 
+#logo-load {
+  animation-direction: reverse;
+  animation-name: logo-load-in;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-duration: 1ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+/* Fade in for home page (excluding logo) */
+.page-load {
+  animation-name: page-load-in;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
 #info-text {
   color:  #282c34;
 }
@@ -30,11 +42,21 @@
   width: 300px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Fade in for home page (excluding logo) */
+@keyframes page-load-in {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes logo-load-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

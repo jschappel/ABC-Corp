@@ -67,12 +67,12 @@ class Login extends Component {
          const bootLink = <a href="https://getbootstrap.com/">Bootstrap</a>
 
         return (
-            <div>
+            <div className='page-load'>
                 <div className='d-flex justify-content-end m-1'>
                     <a style={{color: '#60b0f4'}} href='https://github.com/jschappel/ABC-Corp'> Check me out on Github! {this.githubIcon}</a>
                 </div>
                 <div className="App-header">
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center" id='logo-load'>
                         <img src={ABCLogo} className="img-fluid" alt="Responsive"/>
                     </div>
                     <div className="row justify-content-center">
