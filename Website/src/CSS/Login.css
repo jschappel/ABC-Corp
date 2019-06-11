@@ -1,4 +1,4 @@
-.App-header {
+.Login-header {
   /*background-color: #282c34; */
   min-height: 90vh;
   display: flex;
@@ -8,22 +8,7 @@
   /*font-size: calc(1px + 1.3vmin); */
 }
 
-.App-link {
-  color: #60b0f4;
-}
-
-#logo-load {
-  animation-direction: reverse;
-  animation-name: logo-load-in;
-  animation-delay: 0s;
-  animation-direction: normal;
-  animation-duration: 1ms;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in;
-}
-
-/* Fade in for home page (excluding logo) */
+/* Fade in for home page */
 .page-load {
   animation-name: page-load-in;
   animation-delay: 0s;
@@ -42,17 +27,8 @@
   width: 300px;
 }
 
-/* Fade in for home page (excluding logo) */
+/* Fade in for home page */
 @keyframes page-load-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes logo-load-in {
   0% {
     opacity: 0;
   }
