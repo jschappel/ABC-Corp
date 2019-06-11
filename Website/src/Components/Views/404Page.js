@@ -1,12 +1,10 @@
 import React from 'react'
-import Navigation from '../Navbars/navigation'
-
+import '../../CSS/404Page.css'
 
 const Error = () => {
     return (
-        <div>
-            <Navigation />
-            <p>Hello! How do you brew?</p>
+        <div className='error-body'>
+            <p>Oh No! This page doesn't exist!</p>
         </div>
     )
 }
