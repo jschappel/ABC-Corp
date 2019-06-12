@@ -7,6 +7,7 @@ module.exports = gql`
         last_update: String!
         city: String!
         country: Country!
+        addresses: [Address!]
     }
 
     extend type Query{
@@ -15,7 +16,7 @@ module.exports = gql`
     }
 
     extend type Mutation{
-        createCity(city: String!, country_id: ID!): City!
-        updateCity(id: ID!, city: String, country_id: ID!): City!
+        createCity(city: String!, country_id: ID!): Boolean!
+        updateCity(id: ID!, city: String, country_id: ID!): Boolean!
     }
 `

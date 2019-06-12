@@ -6,45 +6,47 @@ const connection = require('../Database/database')
  */
 
  /**
-  * getCountry: retrieves a single country from db based on id
-  * @param {String} country_id: the id of the country to be queried
+  * getCities: retrieves a single city from db based on id
+  * @param {String} city_id: the id of the city to be queried
   */
- function getCountry(country_id){
-    const sql = 'Select * from Country where country_id = ?'
+ function getCity(city_id){
+    const sql = 'Select * from City where city_id = ?'
 
     return new Promise( (resolve, reject) => {
-        connection.query(sql, [country_id], (error, results, fields) =>{
+        connection.query(sql, [city_id], (error, results, fields) =>{
             if(error) return reject(error)
             if(results.length < 1){
-                return reject({sqlMessage: `No country with id:${country_id} exists.`})
+                return reject({sqlMessage: `No country with id:${city_id} exists.`})
             }
            
-            const country = {
-                id: results[0].country_id,
+            const city = {
+                id: results[0].city_id,
+                city: results[0].city,
                 date_created: results[0].date_created,
                 last_update: results[0].last_update,
-                country: results[0].country
+                country_id: results[0].fk_country_id
             }
-            resolve(country)
+            resolve(city)
         })
     })
 }
 
 /**
-  * getCountries: retrieves an array of all countries in db
+  * getCities: retrieves an array of all cities in db
   */
- function getCountries() {
-    const sql = 'Select * from Country'
+ function getCities() {
+    const sql = 'Select * from City'
 
     return new Promise( (resolve, reject) => {
         connection.query(sql, (error, results, fields) =>{
             if(error) return reject(error)
             resolve(results.map( obj => {
                 return {
-                    id: obj.country_id,
+                    id: obj.city_id,
+                    city: obj.city,
                     date_created: obj.date_created,
                     last_update: obj.last_update,
-                    country: obj.country
+                    country_id: obj.fk_country_id   
                 }
             }))
         })
@@ -56,16 +58,16 @@ const connection = require('../Database/database')
  */
 
  /**
-  * createCountry inserts given country into db
-  * @param {String} country: name of country 
+  * createCity: inserts given cityy into db
+  * @param {String} city: name of city
   */
-function createCountry(country){
+function createCity(city, country_id){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
             if(error) reject(error)
 
-            const sql = `Insert into Country(country) Values(?)`
-            connection.query(sql, [country], (error, results, fields) => {
+            const sql = `Insert into City(city, fk_country_id) Values(?, ?)`
+            connection.query(sql, [city, country_id], (error, results, fields) => {
                 if(error){
                     return connection.rollback(() => {
                         reject(error)
@@ -87,17 +89,18 @@ function createCountry(country){
 }
 
 /**
- * updateCountry: updates country in db based on given id
- * @param {String} country_id: id of country
- * @param {String} country: name of country
+ * updateCity: updates city in db based on given id
+ * @param {String} city_id: id of city
+ * @param {String} city: name of city
+ * @param {String} country_id: id of country that city is associated with
  */
-function updateCountry(country_id, country){
+function updateCity(city_id, city, country_id){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
             if(error) reject(error)
 
-            const sql = `Update Country SET country =  ? where country_id = ?`
-            connection.query(sql, [country, country_id],  (error, results, fields) => {
+            const sql = `Update City SET city =  ?, country_id = ? where city_id = ?`
+            connection.query(sql, [city, country_id, city_id],  (error, results, fields) => {
                 if(error){
                     return connection.rollback(() => {
                         reject(error)
@@ -119,19 +122,22 @@ function updateCountry(country_id, country){
 }
 
 /**
- * getCountryCities: retrives all cities associated with given country id.
- * @param {String} country_id 
+ * getCityAddresses: retrives all addresses associated with given city id.
+ * @param {String} city_id
  */
-function getCountryCities(country_id) {
-    const sql = 'SELECT * FROM CITY WHERE fk_country_id = ?'
+function getCityAddresses(city_id) {
+    const sql = 'SELECT * FROM Address WHERE fk_city_id = ?'
     return new Promise( ( resolve, reject ) => {
-        connection.query(sql, [country_id], ( error, results, fields) => {
+        connection.query(sql, [city_id], ( error, results, fields) => {
             if (error) return reject(error)
              resolve(results.map( obj => {
                 return {
-                    id: obj.city_id,
-                    city: obj.city,
-                    country: obj.fk_country_id,
+                    id: obj.address_id,
+                    address1: obj.address1,
+                    address2: obj.address2,
+                    district: obj.district,
+                    postal_code: obj.postal_code,
+                    city_id: obj.fk_city_id,
                     date_created: obj.date_created,
                     last_update: obj.last_update
                 }
@@ -141,9 +147,9 @@ function getCountryCities(country_id) {
 }
 
 module.exports = {
-    getCountry,
-    getCountries,
-    createCountry,
-    updateCountry,
-    getCountryCities,
+    getCity,
+    getCities,
+    createCity,
+    updateCity,
+    getCityAddresses,
 }
