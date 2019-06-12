@@ -6,6 +6,7 @@ module.exports = gql`
         date_created: String!
         last_update: String!
         country: String!
+        cities: [City!]
     }
 
     extend type Query{
