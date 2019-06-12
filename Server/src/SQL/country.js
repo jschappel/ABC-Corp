@@ -118,9 +118,28 @@ function updateCountry(country_id, country){
     })
 }
 
+function getCountryCities(country_id) {
+    const sql = 'SELECT * FROM CITY WHERE fk_country_id = ?'
+    return new Promise( ( resolve, reject ) => {
+        connection.query(sql, [country_id], ( error, results, fields) => {
+            if (error) return reject(error)
+             resolve(results.map( obj => {
+                return {
+                    id: obj.city_id,
+                    city: obj.city,
+                    country: obj.fk_country_id,
+                    date_created: obj.date_created,
+                    last_update: obj.last_update
+                }
+            }))
+        })
+    })
+}
+
 module.exports = {
     getCountry,
     getCountries,
     createCountry,
-    updateCountry
+    updateCountry,
+    getCountryCities,
 }

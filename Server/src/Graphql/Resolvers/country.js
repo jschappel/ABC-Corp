@@ -28,8 +28,18 @@ const resolvers = {
             .then(result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
+    },
 
+    Country: {
+        cities: (parent, args) => {
+            console.log(parent.id)
+            console.log('0--------------0')
+            console.log(parent.id)
 
+            return Country.getCountryCities(parent.id)
+            .then( results => {console.log(results)})
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        }
     }
 }
 

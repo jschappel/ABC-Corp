@@ -75,5 +75,5 @@ values("1236 steeplechase Ct", "New Jersey", "08755", 1),
 select * from address;
         
 
-use mydb;
+use ABC;
 select * from address;
