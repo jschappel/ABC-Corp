@@ -1,9 +1,6 @@
 const connection = require('../Database/database')
 
-
-/**
- *Queries
- */
+/* --- Queries --- */
 
  /**
   * getCountry: retrieves a single country from db based on id
@@ -51,9 +48,7 @@ const connection = require('../Database/database')
     })
 }
 
-/**
- *Mutators
- */
+/* --- Mutations --- */
 
  /**
   * createCountry inserts given country into db
@@ -119,7 +114,7 @@ function updateCountry(country_id, country){
 }
 
 /**
- * getCountryCities: retrives all cities associated with given country id.
+ * getCountryCities: retrieves all cities associated with given country id.
  * @param {String} country_id 
  */
 function getCountryCities(country_id) {

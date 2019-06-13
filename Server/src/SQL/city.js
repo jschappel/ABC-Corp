@@ -1,15 +1,13 @@
 const connection = require('../Database/database')
 
 
-/**
- *Queries
- */
+/* --- Queries --- */
 
- /**
-  * getCities: retrieves a single city from db based on id
-  * @param {String} city_id: the id of the city to be queried
-  */
- function getCity(city_id){
+/**
+ * getCity: retrieves a single city from db based on id
+ * @param {String} city_id: the id of the city to be queried
+ */
+function getCity(city_id){
     const sql = 'Select * from City where city_id = ?'
 
     return new Promise( (resolve, reject) => {
@@ -33,8 +31,8 @@ const connection = require('../Database/database')
 
 /**
   * getCities: retrieves an array of all cities in db
-  */
- function getCities() {
+ */
+function getCities() {
     const sql = 'Select * from City'
 
     return new Promise( (resolve, reject) => {
@@ -53,14 +51,16 @@ const connection = require('../Database/database')
     })
 }
 
-/**
- *Mutators
- */
 
- /**
-  * createCity: inserts given cityy into db
-  * @param {String} city: name of city
-  */
+
+/* --- Mutations --- */
+
+
+/**
+ * createCity: inserts given city into db
+ * @param {String} city: name of city
+ * @param {*} country_id: the id of the country that the city is located in
+ */
 function createCity(city, country_id){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
@@ -122,7 +122,7 @@ function updateCity(city_id, city, country_id){
 }
 
 /**
- * getCityAddresses: retrives all addresses associated with given city id.
+ * getCityAddresses: retrieves all addresses associated with given city id.
  * @param {String} city_id
  */
 function getCityAddresses(city_id) {
