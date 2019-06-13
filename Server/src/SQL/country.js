@@ -57,7 +57,11 @@ const connection = require('../Database/database')
 function createCountry(country){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
-            if(error) reject(error)
+            if(error){
+                return connection.rollback(() => {
+                    reject(error)
+                })
+            }
 
             const sql = `Insert into Country(country) Values(?)`
             connection.query(sql, [country], (error, results, fields) => {
@@ -89,7 +93,11 @@ function createCountry(country){
 function updateCountry(country_id, country){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
-            if(error) reject(error)
+            if(error){
+                return connection.rollback(() => {
+                    reject(error)
+                })
+            }
 
             const sql = `Update Country SET country =  ? where country_id = ?`
             connection.query(sql, [country, country_id],  (error, results, fields) => {

@@ -64,7 +64,11 @@ function getCities() {
 function createCity(city, country_id){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
-            if(error) reject(error)
+            if(error){
+                return connection.rollback(() => {
+                    reject(error)
+                })
+            }
 
             const sql = `Insert into City(city, fk_country_id) Values(?, ?)`
             connection.query(sql, [city, country_id], (error, results, fields) => {
@@ -97,7 +101,11 @@ function createCity(city, country_id){
 function updateCity(city_id, city, country_id){
     return new Promise((resolve, reject) => {
         connection.beginTransaction(error => {
-            if(error) reject(error)
+            if(error){
+                return connection.rollback(() => {
+                    reject(error)
+                })
+            }
 
             const sql = `Update City SET city =  ?, country_id = ? where city_id = ?`
             connection.query(sql, [city, country_id, city_id],  (error, results, fields) => {
