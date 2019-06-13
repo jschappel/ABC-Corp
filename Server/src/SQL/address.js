@@ -100,9 +100,9 @@ function createAddress(address1, address2, district, postal_code, city_id) {
  * @param {String} id id of address being updated
  * @param {String} address1 name of main address
  * @param {String} address2 name of secondary address (can be null)
- * @param {*} district name of state/providence
- * @param {*} postal_code number representing the postal code for the address (can be null)
- * @param {*} city_id the id of the city where the address is located
+ * @param {String} district name of state/providence
+ * @param {String} postal_code number representing the postal code for the address (can be null)
+ * @param {String} city_id the id of the city where the address is located
  * @returns {Boolean} true if the query when through without any errors
  */
 function updateAddress(id, address1, address2, district, postal_code, city_id) {
