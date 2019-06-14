@@ -10,19 +10,23 @@ const resolvers = {
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
         categories: () => {
-            return Category.getCategories3()
+            return Category.getCategories()
             .then(results => results)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
     },
 
     Mutation: {
-        createCategory: (parent, {}) => {
-            
+        createCategory: (parent, {name}) => {
+            return Category.createCategory(name)
+            .then(result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
 
-        updateCategory: (parent, {}) => {
-           
+        updateCategory: (parent, {id, name}) => {
+           return Category.updateCategory(id, name)
+           .then(result => result)
+           .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
     },
 }
