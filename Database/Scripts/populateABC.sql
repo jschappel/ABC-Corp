@@ -76,3 +76,28 @@ select * from address;
 
 use ABC;
 select * from address;
+
+INSERT INTO vendor(name, phone, email, fk_address_id)
+VALUES ("Vendor1", "908-888-7777", "vendor1@gmail.com", 1),
+		("Vendor2", "908-888-8888", "vendor2@gmail.com", 2),
+        ("Vendor3", "908-888-9999", "vendor3@gmail.com", 3),
+        ("Vendor4", "908-888-6666", "vendor4@gmail.com", 4);
+        
+INSERT INTO category(category)
+VALUES ("Phone"),
+		("Desktop"),
+        ("Laptop"),
+        ("Projector");
+SELECT * FROM category;
+
+
+INSERT INTO model(model_name, model_number, fk_category_id)
+VALUES ("MacBook Pro 2012","MD101xx/A MD102xx/A",3),
+		("MacBook Air 2018","A1932 (EMC 3184)", 3),
+        ("IPhone 6s","A1633", 1),
+        ("Epson VS250","VS250",4);
+        
+INSERT INTO Office(office, phone_number, equipment_contact, fk_address_id, active)
+VALUES ("Office 1", "908-555-6677", "908-333-4422", 2, 1),
+		("Office 2", "908-676-4499", "908-888-9900", 3, 1),
+        ("Office 3", "908-324-7722", "908-444-2233", 4, 0);
