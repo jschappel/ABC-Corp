@@ -6,7 +6,8 @@
  const addressResolvers = require('./address')
  const vendorResolvers = require('./vendor')
  const categoryResolvers = require('./category')
+ const modelResolvers = require('./model')
 
- const combinedResolvers = [countryResolvers, cityResolvers, addressResolvers, vendorResolvers, categoryResolvers]
+ const combinedResolvers = [countryResolvers, cityResolvers, addressResolvers, vendorResolvers, categoryResolvers, modelResolvers]
 
  module.exports = combinedResolvers

@@ -31,7 +31,7 @@ async function getCategory(id) {
 }
 
 /**
- * getCategory: retrieves a single category from db based on id
+ * getCategories: retrieves all categories from db
  * @returns {Promise} Promise is resolved as long as no error occurs in the query. The promise contains an array of objects. 
  * The array can be empty.
  */
@@ -93,9 +93,38 @@ async function updateCategory(category_id, category_name) {
 }
 
 
+/**
+ * getCategoryModels: Retrieves all models that are classified under the given category
+ * @param {String} id the id of the category
+ * @returns {Promise} Promise is resolved as long as no error occurs in the query. The promise contains an array of objects. 
+ * The array can be empty.
+ */
+async function getCategoryModels(id) {
+    try {
+        const sql = `SELECT * FROM model where fk_category_id = ?`
+        const results = await AuxQuery.selectQuery(connection, sql, [id])
+        return results.map( obj => {
+            return {
+                id: obj.model_id,
+                model_name: obj.model_name,
+                model_number: obj.model_number,
+                date_created: obj.date_created,
+                last_update: obj.last_update,
+                category_id: obj.fk_category_id
+            }
+        })
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+    
+}
+
+
 module.exports = {
     getCategory,
     getCategories,
     createCategory,
     updateCategory,
+    getCategoryModels,
 }

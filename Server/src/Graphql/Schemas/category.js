@@ -7,6 +7,7 @@ module.exports = gql`
         date_created: String!
         last_update: String!
         category: String!
+        models:[Model!]
     }
 
     extend type Query {

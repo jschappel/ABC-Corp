@@ -29,6 +29,15 @@ const resolvers = {
            .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
     },
+
+    Category: {
+        models: ({ id }) => {
+            console.log(id)
+            return Category.getCategoryModels(id)
+            .then(results => results)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        }
+    }
 }
 
 module.exports = resolvers
