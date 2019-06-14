@@ -1,4 +1,4 @@
-const { gql} = require('apollo-server-express')
+const { gql } = require('apollo-server-express')
 
 module.exports = gql`
     """A vendor is a business that ABC Corp has bought/leased items from"""
@@ -22,7 +22,7 @@ module.exports = gql`
     extend type Mutation {
         """Creates and adds a vendor the the database"""
         createVendor(name: String!, phone_number: String!, email: String!, address_id: ID!): Boolean!
-        """Updates a vender that is associated with the given id"""
+        """Updates the vender that is associated with the given id"""
         updateVendor(id: ID!, name: String!, phone_number: String!, email: String!, address_id: ID!): Boolean!
     }
 `
