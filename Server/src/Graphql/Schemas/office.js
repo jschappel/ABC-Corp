@@ -6,12 +6,11 @@ module.exports = gql`
         id: ID!
         date_created: String!
         last_update: String!
+        office: String!
         phone_number: String!
         service_number: String!
         active: Boolean!
-        employees: [Employee!]!
         address: Address!
-        rooms: [Room!]!
     }
 
     extend type Query {
@@ -27,11 +26,10 @@ module.exports = gql`
 
     extend type Mutation {
         """Creates and adds a model the the database"""
-        createOffice(office_name: String!, phone_number: String!, service_number: ID!, active: Boolean!): Boolean!
+        createOffice(office_name: String!, phone_number: String!, service_number: ID!, active: Boolean!, address_id: ID!): Boolean!
         """Updates the model that is associated with the given id"""
-        updateModel(id: ID!, office_name: String!, phone_number: String!, service_number: ID!, active: Boolean!): Boolean!
+        updateOffice(id: ID!, office_name: String!, phone_number: String!, service_number: ID!, active: Boolean!, address_id: ID!): Boolean!
         """Soft deletes am office from the the database"""
         deleteOffice(id: ID!): Boolean!
     }
-
 `

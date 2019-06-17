@@ -10,6 +10,7 @@ const vendorSchema = require('./vendor')
 const categorySchema = require('./category')
 const modelSchema = require('./model')
 const roleSchema = require('./role')
+const officeSchema = require('./office')
 const accountSchema = require('./account')
 
 const linkSchema = gql`
@@ -26,5 +27,17 @@ const linkSchema = gql`
     }
 `
 
-const combineSchema = [linkSchema, ABCinterface, countrySchema, citySchema, addressSchema, vendorSchema, categorySchema, modelSchema, roleSchema, accountSchema]
+const combineSchema = [
+    linkSchema,
+    ABCinterface,
+    countrySchema,
+    citySchema,
+    addressSchema,
+    vendorSchema,
+    categorySchema,
+    modelSchema,
+    roleSchema,
+    accountSchema,
+    officeSchema,
+]
 module.exports = combineSchema
