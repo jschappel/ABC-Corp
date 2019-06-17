@@ -119,39 +119,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ABC`.`Permissions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ABC`.`Permissions` (
-  `permissions_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `create?` TINYINT(1) UNSIGNED NOT NULL,
-  `read?` TINYINT(1) UNSIGNED NOT NULL,
-  `update?` TINYINT(1) UNSIGNED NOT NULL,
-  `delete?` TINYINT(1) UNSIGNED NOT NULL,
-  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`permissions_id`),
-  UNIQUE INDEX `permissions_id_UNIQUE` (`permissions_id` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `ABC`.`Role`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ABC`.`Role` (
-  `role_id` SMALLINT(5) UNSIGNED NOT NULL,
+  `role_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role` VARCHAR(45) NOT NULL,
-  `fk_permissions_id` SMALLINT(5) UNSIGNED NOT NULL,
+  `c` TINYINT(1) UNSIGNED NOT NULL,
+  `r` TINYINT(1) UNSIGNED NOT NULL,
+  `u` TINYINT(1) UNSIGNED NOT NULL,
+  `d` TINYINT(1) UNSIGNED NOT NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`role_id`),
   UNIQUE INDEX `role_id_UNIQUE` (`role_id` ASC) VISIBLE,
-  UNIQUE INDEX `role_UNIQUE` (`role` ASC) VISIBLE,
-  INDEX `fk_role_permissions_idx` (`fk_permissions_id` ASC) VISIBLE,
-  CONSTRAINT `fk_role_permissions`
-    FOREIGN KEY (`fk_permissions_id`)
-    REFERENCES `ABC`.`Permissions` (`permissions_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `role_UNIQUE` (`role` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -159,7 +140,7 @@ ENGINE = InnoDB;
 -- Table `ABC`.`Account`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ABC`.`Account` (
-  `account_id` SMALLINT(5) UNSIGNED NOT NULL,
+  `account_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL COMMENT 'the username for employee to log into database',
   `password` VARCHAR(45) NOT NULL COMMENT 'password for employee to login',
   `fk_role_id` SMALLINT(5) UNSIGNED NOT NULL,

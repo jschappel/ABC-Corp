@@ -9,13 +9,20 @@ module.exports = gql`
         phone_number: String!
         service_number: String!
         active: Boolean!
+        employees: [Employee!]!
+        address: Address!
+        rooms: [Room!]!
     }
 
     extend type Query {
         """Retrieves the office associated with the given id"""
         office(id: ID!): Office
-        """Retrieves all offices that are in the database"""
-        offices: [Offices!]!
+        """Retrieves all offices (active and inactive) that are in the database"""
+        offices: [Office!]!
+        """Retrieves all active offices that are in the database"""
+        activeOffices: [Office!]!
+        """Retrieves all inactive offices that are in the database"""
+        inactiveOffices: [Office!]!
     }
 
     extend type Mutation {

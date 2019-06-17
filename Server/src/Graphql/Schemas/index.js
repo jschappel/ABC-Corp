@@ -9,6 +9,8 @@ const addressSchema = require("./address")
 const vendorSchema = require('./vendor')
 const categorySchema = require('./category')
 const modelSchema = require('./model')
+const roleSchema = require('./role')
+const accountSchema = require('./account')
 
 const linkSchema = gql`
     type Query{
@@ -24,5 +26,5 @@ const linkSchema = gql`
     }
 `
 
-const combineSchema = [linkSchema, ABCinterface, countrySchema, citySchema, addressSchema, vendorSchema, categorySchema, modelSchema]
+const combineSchema = [linkSchema, ABCinterface, countrySchema, citySchema, addressSchema, vendorSchema, categorySchema, modelSchema, roleSchema, accountSchema]
 module.exports = combineSchema
