@@ -27,9 +27,11 @@ class App extends Component {
       <BrowserRouter>
           <Switch>
             <Route exact path='/' component={Login} />
-            <ProtectedRoute path='/home' component={Home} state={this.state}/>
-            <ProtectedRoute path='/employee' component={Employee} state={this.state}/>
-            <ProtectedRoute path='/inventory' component={Inventory} state={this.state}/>
+            <ProtectedRoute exact path='/home' component={Home} state={this.state}/>
+            <ProtectedRoute exact path='/employee' component={Employee} state={this.state}/>
+            <ProtectedRoute exact path='/inventory' component={Inventory} state={this.state}/>
+            <ProtectedRoute exact path='/reservation' component={Inventory} state={this.state}/>
+            <ProtectedRoute exact path='/lease' component={Inventory} state={this.state}/>
             <Route component={NotFound}/>
           </Switch>
         </BrowserRouter>

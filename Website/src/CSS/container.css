@@ -1,0 +1,14 @@
+
+.view-container {
+    margin-top: 10px;
+    width: 95vw;
+    min-height: 91vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#home-container {
+    background-color: aliceblue;
+    /*border: 1px solid black; */
+    border-radius: 10px;
+}

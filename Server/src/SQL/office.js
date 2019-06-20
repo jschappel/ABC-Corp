@@ -6,7 +6,7 @@ const AuxQueries = require('./abstract_queries')
 /**
  * getOffice: retrieves a single office type from db based on the id passes
  * @param {String} id the id of the office to be queried
- * @returns {Promise} Promise is resolved if there is one model associated with an id, otherwise promise is rejected
+ * @returns {Promise} Promise is resolved if there is one office associated with an id, otherwise promise is rejected
  */
 async function getOffice(id) {
     try{
@@ -116,7 +116,7 @@ async function createOffice(office_name, phone_number, service_number, status, a
 
 /**
  * updateOffice: Updates a specified office in the database
- * @param {String} office_id the if of the office that you wish to update
+ * @param {String} office_id the id of the office that you wish to update
  * @param {String} office_name The name of the office
  * @param {String} phone_number The phone number of the office
  * @param {String} service_number The phone number of the office service line
@@ -128,7 +128,7 @@ async function createOffice(office_name, phone_number, service_number, status, a
 async function updateOffice(office_id, office_name, phone_number, service_number, status, address_id) {
     try{
         const sql = `UPDATE office SET office = ?, phone_number = ? , equipment_number = ?, active = ?, fk_address_id = ? WHERE office_id = ?`
-        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [office_name, phone_number, service_number, status, address_id. office_id])
+        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [office_name, phone_number, service_number, status, address_id, office_id])
         return result
     }
     catch(error) {
@@ -136,10 +136,81 @@ async function updateOffice(office_id, office_name, phone_number, service_number
     }
 }
 
+/**
+ * deleteOffice: Soft deletes an office from the database
+ * @param {String} office_id The id of the office that you wish to delete
+ * @returns {Promise} Promise is resolved as log as no error occurs during the transaction. Promise will
+ * resolve true if the transaction was successfully otherwise promise will resolve false
+ */
+async function deleteOffice(office_id) {
+    try {
+        const sql = `UPDATE office SET active = 0 WHERE office_id = ?`
+        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [office_id])
+        return result
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+}
+
+/**
+ * activateOffice: Sets an inactive office to active
+ * @param {String} office_id The id of the office that you wish to activate
+ * @returns {Promise} Promise is resolved as log as no error occurs during the transaction. Promise will
+ * resolve true if the transaction was successfully otherwise promise will resolve false
+ */
+async function activateOffice(office_id) {
+    try {
+        const sql = `UPDATE office SET active = 1 WHERE office_id = ?`
+        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [office_id])
+        return result
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+}
+
+/**
+ * getOfficeEmployees: get all employees in a specific office
+ * @param {String} office_id The id of the office to query
+ * @returns {Promise} Promise is resolved as long as no error occurs in the query. The promise contains an array of objects. 
+ * The array can be empty.
+ */
+async function getOfficeEmployees(office_id) {
+    try {
+        const sql = `SELECT * FROM employee WHERE fk_office_id = ?`
+        const resultArray = await AuxQueries.selectQuery(connection, sql, [office_id])
+        return resultArray.map( obj => {
+            return {
+                id: obj.employee_id,
+                date_created: obj.date_created,
+                last_update: obj.last_update,
+                first_name: obj.first_name,
+                last_name: obj.last_name,
+                phone_number: obj.phone_number,
+                work_phone_number: obj.work_phone_number,
+                email: obj.email,
+                active: obj.active,
+                address_id: obj.fk_address_id,
+                office_id: obj.fk_office_id,
+                account_id: obj.fk_account_id
+            }
+        })
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+}
+
+
+
 module.exports = {
     getOffice,
     getOffices,
     createOffice,
     updateOffice,
     getOfficesByStatus,
+    deleteOffice,
+    activateOffice,
+    getOfficeEmployees,
 }

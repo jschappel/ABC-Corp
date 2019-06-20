@@ -10,6 +10,8 @@
  const roleResolvers = require('./role')
  const accountResolvers = require('./account')
  const officeResolvers = require('./office')
+ const roomResolvers = require('./room')
+ const employeeResolvers = require('./employee')
 
  const combinedResolvers = [
      countryResolvers,
@@ -21,6 +23,8 @@
      roleResolvers,
      accountResolvers,
      officeResolvers,
+     roomResolvers,
+     employeeResolvers
     ]
 
  module.exports = combinedResolvers

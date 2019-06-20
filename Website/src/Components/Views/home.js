@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import Navigation from '../Navbars/navigation'
+import Navigation from '../Navbars/account_navigation'
+import ViewNavigation from '../Navbars/view_navigation'
+import '../../CSS/container.css'
 
 
 class Home extends Component {
@@ -18,7 +20,16 @@ class Home extends Component {
         return (
             <div>
                 <Navigation />
-                <p>This is the home page</p>
+                <div className="view-container">
+                    <div className='container-fluid' id='home-container'>
+                        <div className='flex-row'>
+                            <ViewNavigation active={"home"} />
+                        </div>
+                        <div className='row justify-content-center'>
+                            <p>Hello World!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }    

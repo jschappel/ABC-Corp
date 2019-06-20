@@ -40,17 +40,6 @@ class Navigation extends Component {
                     <span className="navbar-toggler-icon" name="menu" onClick={this.toggleMenu}></span>
                 </button>
                 <div className={"collapse navbar-collapse " + show} id="navbarNavDropdown">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <NavLink className='nav-link' to='/home'>Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className='nav-link' to='/inventory'>Inventory</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className='nav-link' to='/employee'>Employees</NavLink>
-                        </li>
-                    </ul>
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <NavLink className='nav-link' to='/' exact>Account Settings</NavLink>

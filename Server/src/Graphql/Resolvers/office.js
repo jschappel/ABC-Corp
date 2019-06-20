@@ -44,14 +44,32 @@ const resolvers = {
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
 
-        deleteOffice: (parent, args) => {
+        deleteOffice: (parent, { id }) => {
+            return Office.deleteOffice(id)
+            .then(result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        },
 
+        reactivateOffice: (parent, { id }) => {
+            return Office.activateOffice(id)
+            .then(result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
     },
 
     Office: {
         address: (parent) => {
             return getAddress(parent.address_id)
+            .then( result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        },
+        
+        rooms: (parent, args) => {
+
+        },
+
+        employees: (parent, { id }) => {
+            return Office.getOfficeEmployees(id)
             .then( result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         }

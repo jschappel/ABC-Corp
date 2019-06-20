@@ -12,6 +12,8 @@ const modelSchema = require('./model')
 const roleSchema = require('./role')
 const officeSchema = require('./office')
 const accountSchema = require('./account')
+const employeeSchema = require('./employee')
+const roomSchema = require('./room')
 
 const linkSchema = gql`
     type Query{
@@ -39,5 +41,7 @@ const combineSchema = [
     roleSchema,
     accountSchema,
     officeSchema,
+    employeeSchema,
+    roomSchema,
 ]
 module.exports = combineSchema

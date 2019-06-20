@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Navigation from '../Navbars/navigation'
+import Navigation from '../Navbars/account_navigation'
+import ViewNavigation from '../Navbars/view_navigation'
 
 
 class Inventory extends Component {
@@ -15,9 +16,18 @@ class Inventory extends Component {
         console.log(this.userInfo)
         return (
             <div>
-                <Navigation />
-                <p>This is the Inventory page</p>
+            <Navigation />
+            <div className="view-container">
+                <div className='container-fluid' id='home-container'>
+                    <div className='flex-row'>
+                        <ViewNavigation />
+                    </div>
+                    <div className='row justify-content-center'>
+                        <p>Hello World!</p>
+                    </div>
+                </div>
             </div>
+        </div>
         )
     }
 }
