@@ -10,6 +10,7 @@ module.exports = gql`
         phone_number: String!
         email: String!
         address: Address!
+        leases: [Lease!]!
     }
 
     extend type Query {

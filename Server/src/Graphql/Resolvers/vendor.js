@@ -36,6 +36,12 @@ const resolvers = {
             return getAddress(address_id)
             .then( result => result )
             .catch(error => {throw new UserInputError(error.sqlMessage)})
+        },
+
+        leases: ({id}) => {
+            return Vendor.getVendorLeases(id)
+            .then( results => results )
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
     }
 }

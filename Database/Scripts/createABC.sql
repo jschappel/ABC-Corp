@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Account` (
   PRIMARY KEY (`account_id`),
   UNIQUE INDEX `account_id_UNIQUE` (`account_id` ASC) VISIBLE,
   INDEX `fk_account_role_idx` (`fk_role_id` ASC) VISIBLE,
+  UNIQUE INDEX `fk_role_id_UNIQUE` (`fk_role_id` ASC) VISIBLE,
   CONSTRAINT `fk_account_role`
     FOREIGN KEY (`fk_role_id`)
     REFERENCES `ABC`.`Role` (`role_id`)
@@ -269,8 +270,14 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Lease` (
   `end_date` TIMESTAMP NOT NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fk_vendor_id` SMALLINT(5) UNSIGNED NOT NULL,
   PRIMARY KEY (`lease_id`),
-  UNIQUE INDEX `lease_id_UNIQUE` (`lease_id` ASC) VISIBLE)
+  UNIQUE INDEX `lease_id_UNIQUE` (`lease_id` ASC) VISIBLE,
+  CONSTRAINT `fk_vendor_id`
+    FOREIGN KEY (`fk_vendor_id`)
+    REFERENCES `ABC`.`Vendor` (`vendor_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

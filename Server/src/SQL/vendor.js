@@ -1,5 +1,5 @@
 const connection = require('../Database/database')
-
+const AuxQueries = require('./abstract_queries')
 
 /* --- Queries --- */
 
@@ -54,6 +54,32 @@ function getVendors() {
             }))
         })
     })
+}
+
+/**
+ * getVendorLeases: Retrieves all leases that the given vendor owns
+ * @param {String} id The vendor id
+ * @returns {Promise} Promise is resolved as long as no error occurs in the query. The promise contains an array of objects.
+ * The array can be empty.
+ */
+async function getVendorLeases(id) {
+    try {
+        const sql = `SELECT * FROM lease WHERE fk_vendor_id = ?`
+        const resultArray = await AuxQueries.selectQuery(connection, sql, [id])
+        return resultArray.map( obj => {
+            return {
+                id: obj.lease_id,
+                date_created: obj.date_created,
+                last_update: obj.last_update,
+                lease_start: obj.start_date,
+                lease_end: obj.end_date,
+                vendor_id: obj.fk_vendor_id
+            }
+        })
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
 }
 
 
@@ -134,5 +160,6 @@ module.exports = {
     getVendor,
     getVendors,
     createVendor,
-    updateVendor
+    updateVendor,
+    getVendorLeases,
 }

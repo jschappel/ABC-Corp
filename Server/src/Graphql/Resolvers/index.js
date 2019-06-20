@@ -12,6 +12,8 @@
  const officeResolvers = require('./office')
  const roomResolvers = require('./room')
  const employeeResolvers = require('./employee')
+ const leaseResolvers = require('./lease')
+ const dateScalarResolvers = require('./Scalars/date')
 
  const combinedResolvers = [
      countryResolvers,
@@ -24,7 +26,9 @@
      accountResolvers,
      officeResolvers,
      roomResolvers,
-     employeeResolvers
+     employeeResolvers,
+     leaseResolvers,
+     dateScalarResolvers,
     ]
 
  module.exports = combinedResolvers
