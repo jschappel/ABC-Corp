@@ -15,6 +15,7 @@ const accountSchema = require('./account')
 const employeeSchema = require('./employee')
 const roomSchema = require('./room')
 const leaseSchema = require('./lease')
+const equipmentSchema = require('./equipment')
 const dateScalarSchema = require('./Scalars/date')
 
 const linkSchema = gql`
@@ -47,5 +48,6 @@ const combineSchema = [
     roomSchema,
     leaseSchema,
     dateScalarSchema,
+    equipmentSchema,
 ]
 module.exports = combineSchema

@@ -13,6 +13,7 @@
  const roomResolvers = require('./room')
  const employeeResolvers = require('./employee')
  const leaseResolvers = require('./lease')
+ const equipmentResolvers = require('./equipment')
  const dateScalarResolvers = require('./Scalars/date')
 
  const combinedResolvers = [
@@ -28,6 +29,7 @@
      roomResolvers,
      employeeResolvers,
      leaseResolvers,
+     equipmentResolvers,
      dateScalarResolvers,
     ]
 
