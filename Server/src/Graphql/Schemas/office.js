@@ -27,9 +27,9 @@ module.exports = gql`
     }
 
     extend type Mutation {
-        """Creates and adds a model the the database"""
+        """Creates and adds a office to the database"""
         createOffice(office_name: String!, phone_number: String!, service_number: ID!, active: Boolean!, address_id: ID!): Boolean!
-        """Updates the model that is associated with the given id"""
+        """Updates the office that is associated with the given id"""
         updateOffice(id: ID!, office_name: String!, phone_number: String!, service_number: ID!, active: Boolean!, address_id: ID!): Boolean!
         """Soft deletes an office from the database"""
         deleteOffice(id: ID!): Boolean!

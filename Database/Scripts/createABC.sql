@@ -288,7 +288,6 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Equipment` (
   `equipment_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `serial_number` VARCHAR(45) NOT NULL,
   `active` TINYINT(1) UNSIGNED NOT NULL COMMENT '1 for active 0 for not active.',
-  `reservable?` TINYINT(1) UNSIGNED NOT NULL,
   `warranty_end_date` TIMESTAMP NULL COMMENT 'if this is null date is past or warranty is past',
   `fk_lease_id` SMALLINT(5) UNSIGNED NULL,
   `fk_vendor_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT 'is the id of company that Equipment was bought from',
