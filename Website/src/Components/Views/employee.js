@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Navigation from '../Navbars/account_navigation'
 import ViewNavigation from '../Navbars/view_navigation'
 import TestTable from '../Tables/hoverTable'
+import Toolbar from '../Toolbars/employee'
 
 
 class Employee extends Component {
@@ -31,11 +32,14 @@ class Employee extends Component {
         .then( response => response.json())
         .then( ({ data }) => {
             this.setState({
-                tableData: data.employees,
+                tableData: data.activeEmployees,
                 isLoading: false
             })
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            this.setState({isLoading: false})
+            console.log(error)
+        })
     }
 
     /**
@@ -62,7 +66,10 @@ class Employee extends Component {
                         <div className='flex-row'>
                             <ViewNavigation />
                         </div>
-                        <div className='row justify-content-center'>
+                        <div className='flex-row mt-3'>
+                            <Toolbar />
+                        </div>
+                        <div className='row justify-content-center mt-3'>
                             {this.renderTable()}
                         </div>
                     </div>
@@ -73,17 +80,17 @@ class Employee extends Component {
 }
 
 const query = `
-    query {
-        employees {
-            id
-            first_name
-            last_name
-            email
-            office {
-                office
-            }
+query {
+    activeEmployees {
+        id
+        first_name
+        last_name
+        email
+        office {
+            office
         }
     }
+}
 `
 
 export default Employee

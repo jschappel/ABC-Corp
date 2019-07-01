@@ -12,6 +12,8 @@ module.exports = gql`
     }
 
     extend type Query {
+        """The current account that is logged in"""
+        me: Account
         """Retrieves the account associated with the given id"""
         account(id: ID!): Account
         """Retrieves all accounts that are in the database"""

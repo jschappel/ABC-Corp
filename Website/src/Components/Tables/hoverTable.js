@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CheckedRow from './TableRows/checkedRow'
+import '../../CSS/Components/table_headers.css'
 class HoverTable extends Component {
 
 
@@ -12,7 +13,7 @@ class HoverTable extends Component {
                 <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col" className='text-center'>First Name</th>
+                        <th scope="col" className='text-center arrow-up'>First Name</th>
                         <th scope="col" className='text-center'>Last Name</th>
                         <th scope="col" className='text-center'>Email</th>
                         <th scope="col" className='text-center'>Office</th>

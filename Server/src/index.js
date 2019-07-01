@@ -3,6 +3,7 @@ const { ApolloServer, makeExecutableSchema } = require('apollo-server-express')
 const resolvers = require('./Graphql/Resolvers/index')
 //const models = require('./SQL/index')
 const typeDefs = require('./Graphql/Schemas/index')
+const jwt = require('express-jwt')
 
 const app = express()
 
@@ -32,6 +33,7 @@ const server = new ApolloServer({
 
 // Add express as middleware
 server.applyMiddleware({ app, path: '/graphql'})
+
 
 // Have the express server listen on port 5000
 app.listen(5000, () => console.log(`Server listening on port 5000`))
