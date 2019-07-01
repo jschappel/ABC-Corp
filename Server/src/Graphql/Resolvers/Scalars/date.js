@@ -38,8 +38,8 @@ function serialize(value) {
 
 /**
  * returnOnError: Helper function for parsing an incoming date string from the client
- * @param {*} operation 
- * @param {*} alternative 
+ * @param {*} operation a function to be applied if no error occurs
+ * @param {*} alternative an action to be applied if an error occurs in the function
  */
 const returnOnError = (operation, alternative) => {
     try {

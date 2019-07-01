@@ -38,7 +38,7 @@ async function getModel(id) {
  */
 async function getModels() {
     try{
-        const sql = `SELECT * FROM model`
+        const sql = `SELECT * FROM model ORDER BY model_name DESC`
         const resultArray = await AuxQueries.selectQuery(connection, sql, [])
         return resultArray.map( obj => {
             return {
