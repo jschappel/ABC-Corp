@@ -12,7 +12,7 @@ async function getEmployee(id) {
     try{
         const sql = `SELECT * FROM employee WHERE employee_id = ?`
         const resultArray = await AuxQueries.selectQuery(connection, sql, [id])
-        if (resultArray.length < 1) throw( {sqlMessage: `No employee with id:${id} exists.`} )
+        if (resultArray.length < 1) return null
         else if(resultArray.length > 1) throw( {sqlMessage: `To many employees with id:${id}. Please contact database admin to resolve issue.`} )
         else {
             const result = resultArray[0]
@@ -99,6 +99,37 @@ async function getEmployeesByStatus(status) {
         return Promise.reject(error)
     }
 
+}
+
+/**
+ * getEmployeeEquipment: retrieves all equipment that is registered under the given employee
+ * @param {String} id The id of the employee to query
+ * @returns {Promise} Promise is resolved as long as no error occurs in the query. The promise contains an array of objects. 
+ * The array can be empty.
+ */
+async function getEmployeeEquipment(id) {
+    try {
+        const sql = `SELECT * FROM equipment WHERE fk_employee_id = ?`
+        const resultArray = await AuxQueries.selectQuery(connection, sql, [id])
+        return resultArray.map( obj => {
+            return {
+                id: obj.equipment_id,
+                date_created: obj.date_created,
+                last_update: obj.last_update,
+                serial_number: obj.serial_number,
+                active: obj.active,
+                warranty_end_date: obj.warranty_end_date,
+                lease_id: obj.fk_lease_id,
+                vendor_id: obj.fk_vendor_id,
+                model_id: obj.fk_model_id,
+                employee_id: obj.fk_employee_id,
+                room_id: obj.fk_room_id,
+            }
+        })
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
 }
 
 
@@ -198,4 +229,5 @@ module.exports = {
     getEmployeesByStatus,
     deleteEmployee,
     activateEmployee,
+    getEmployeeEquipment,
 }

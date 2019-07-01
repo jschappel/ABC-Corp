@@ -70,7 +70,9 @@ values("1236 steeplechase Ct", "New Jersey", "08755", 1),
         ("Homeland of Ronaldo St", "Lisbon", "45334", 6),
         ("St Pattys Day St", "Dublin", "45334", 7),
         ("57 South Orange Ave", "New Jersey", "08976", 2),
-        ("123 ABC St", "New Jersey", "08976", 2);
+        ("123 ABC St", "New Jersey", "08976", 2),
+        ("702 Shadowlawn Drive", "New Jersey", "07090", 3);
+        
         
 select * from address;
 
@@ -101,3 +103,43 @@ INSERT INTO Office(office, phone_number, equipment_contact, fk_address_id, activ
 VALUES ("Office 1", "908-555-6677", "908-333-4422", 2, 1),
 		("Office 2", "908-676-4499", "908-888-9900", 3, 1),
         ("Office 3", "908-324-7722", "908-444-2233", 4, 0);
+        
+INSERT INTO room(room, floor, fk_office_id, active)
+VALUES("1A", 1, 1, 1), ("1B", 1, 1, 1),("1C", 1, 1, 1),
+		("2A", 2, 1, 1), ("2B", 2, 1, 1),("2C", 2, 1, 1),
+        
+        ("1A", 1, 2, 1), ("1B", 1, 2, 1),("1C", 1, 2, 1),
+        ("2A", 2, 2, 1), ("2B", 2, 2, 1),("2C", 2, 2, 0);
+        
+INSERT INTO lease(start_date, end_date, fk_vendor_id) 
+VALUES ("2013-08-05 18:19:03", "2016-08-05 18:19:03", 1),
+		("2017-08-05 18:19:03", "2020-08-05 18:19:03",1),
+        ("2016-08-05 18:19:45", "2019-08-05 18:19:23",2);
+INSERT INTO role(role, c, r, u, d)
+VALUES ("root", 1, 1, 1, 1),
+		("user", 0, 1, 0, 0);        
+        
+INSERT INTO account(username, password, fk_role_id)
+VALUES ("bigPapa", "passowrd", 1),
+		("account2", "passowrd", 2),
+        ("account3", "passowrd", 2);
+        
+        
+INSERT INTO employee(first_name, last_name, phone_number, work_phone_number, email, active, fk_address_id, fk_office_id, fk_account_id)
+VALUES ("Joshua", "Schappel", "9083708410", "9087891882", "jmschappel12@gmail.com", 1, 10, 1, 1),
+		("Dana", "Riback", "8628994666", "9086757746", "d.riback@gmail.com", 1, 9, 1, 2),
+        ("Sam", "Schappel", "9086675463", "9807785564", "sammySchappel@gmail.com", 1, 10, 2, 3);
+       
+SELECT * FROM employee;
+        
+INSERT INTO equipment(serial_number, active, warranty_end_date, fk_lease_id, fk_vendor_id, fk_model_id, fk_room_id, fk_employee_id)
+VALUES ("EAnxMyEu", 1, "2019-08-05 18:19:23", 2, 1, 1, null, null),
+		("FEav4eVQ", 1, "2019-08-05 18:19:23", 2, 1, 1, null, null),
+		("UjPLHCsS", 1, "2019-08-05 18:19:23", 2, 1, 1, 1, 1),
+		("7cKWUyNC", 1, "2019-08-05 18:19:23", 2, 1, 1, 1, 1),
+        ("xZ8mSVb5", 1, "2019-08-05 18:19:23", 3, 2, 2, 2, 1),
+        ("eMnogAz9", 1, "2019-08-05 18:19:23", 3, 2, 3, 3, 3),
+        ("3QoqNm2B", 1, "2019-08-05 18:19:23", 3, 2, 4, 2, 2),
+        ("wH56uxHE", 1, "2019-08-05 18:19:23", 3, 2, 3, 3, 3);
+        
+SELECT * FROM equipment;

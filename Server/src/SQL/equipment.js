@@ -25,7 +25,9 @@ async function getSpecificEquipment(id) {
                 warranty_end_date: result.warranty_end_date,
                 lease_id: result.fk_lease_id,
                 vendor_id: result.fk_vendor_id,
-                model_id: result.fk_model_id
+                model_id: result.fk_model_id,
+                employee_id: result.fk_employee_id,
+                room_id: result.fk_room_id,
             }
         }
     }
@@ -55,7 +57,9 @@ async function getAllEquipment() {
                 warranty_end_date: obj.warranty_end_date,
                 lease_id: obj.fk_lease_id,
                 vendor_id: obj.fk_vendor_id,
-                model_id: obj.fk_model_id
+                model_id: obj.fk_model_id,
+                employee_id: obj.fk_employee_id,
+                room_id: obj.fk_room_id,
             }
         })
     }
@@ -85,7 +89,9 @@ async function getEquipmentByStatus(status) {
                 warranty_end_date: obj.warranty_end_date,
                 lease_id: obj.fk_lease_id,
                 vendor_id: obj.fk_vendor_id,
-                model_id: obj.fk_model_id
+                model_id: obj.fk_model_id,
+                employee_id: obj.fk_employee_id,
+                room_id: obj.fk_room_id,
             }
         })
     }
@@ -105,13 +111,15 @@ async function getEquipmentByStatus(status) {
  * @param {String} model_id The id of the model that the equipment falls under
  * @param {String} vendor_id The id of the vendor of which the equipment was leased/purchased from
  * @param {String} lease_id The id of the lease if there is one. Can be null
+ * @param {String} employee_id The id of the employee if there is one. Can be null
+ * @param {String} room_id The id of the room if there is one. Can be null
  * @returns {Promise} Promise is resolved as log as no error occurs during the transaction. Promise will
  * resolve true if the transaction was successfully otherwise promise will resolve false
  */
-async function createEquipment(serial_number, warranty_end_date, status, model_id, vendor_id, lease_id) {
+async function createEquipment(serial_number, warranty_end_date, status, model_id, vendor_id, lease_id, employee_id, room_id) {
     try {
-        const sql = `INSERT INTO equipment(serial_number, warranty_end_date, active, fk_model_id, fk_vendor_id, lease_id) VALUES(?, ?, ? ,?, ?, ?)`
-        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [serial_number, warranty_end_date, status, model_id, vendor_id, lease_id])
+        const sql = `INSERT INTO equipment(serial_number, warranty_end_date, active, fk_model_id, fk_vendor_id, lease_id, fk_employee_id, fk_room_id) VALUES(?, ?, ? ,?, ?, ?, ?, ?)`
+        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [serial_number, warranty_end_date, status, model_id, vendor_id, lease_id, employee_id, room_id])
         return result
     }
     catch(error) {
@@ -128,13 +136,15 @@ async function createEquipment(serial_number, warranty_end_date, status, model_i
  * @param {String} model_id The id of the model that the equipment falls under
  * @param {String} vendor_id The id of the vendor of which the equipment was leased/purchased from
  * @param {String} lease_id The id of the lease if there is one. Can be null
+ * @param {String} employee_id The id of the employee if there is one. Can be null
+ * @param {String} room_id The id of the room if there is one. Can be null
  * @returns {Promise} Promise is resolved as log as no error occurs during the transaction. Promise will
  * resolve true if the transaction was successfully otherwise promise will resolve false
  */
-async function updateEquipment(equipment_id, serial_number, warranty_end_date, status, model_id, vendor_id, lease_id) {
+async function updateEquipment(equipment_id, serial_number, warranty_end_date, status, model_id, vendor_id, lease_id, employee_id, room_id) {
     try {
-        const sql = `UPDATE equipment SET serial_number = ?, warranty_end_date = ?, active = ?, fk_model_id = ?, fk_vendor_id = ?, fk_lease_id = ? WHERE equipment_id = ?)`
-        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [serial_number, warranty_end_date, status, model_id, vendor_id, lease_id, equipment_id])
+        const sql = `UPDATE equipment SET serial_number = ?, warranty_end_date = ?, active = ?, fk_model_id = ?, fk_vendor_id = ?, fk_lease_id = ?, fk_employee_id = ?, fk_room_id = ? WHERE equipment_id = ?)`
+        const result = await AuxQueries.insertOrUpdateQuery(connection, sql, [serial_number, warranty_end_date, status, model_id, vendor_id, lease_id, employee_id, room_id, equipment_id])
         return result
     }
     catch(error) {

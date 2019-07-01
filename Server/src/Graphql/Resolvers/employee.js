@@ -76,14 +76,16 @@ const resolvers = {
             .then(result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
+
+        equipment: ({id}) => {
+            return Employee.getEmployeeEquipment(id)
+            .then(results => results)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        }
 /*
         reservations: (parent, args) => {
 
         },
-
-        inventory: (parent, args) => {
-
-        }
 */
     }
 }

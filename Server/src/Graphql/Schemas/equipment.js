@@ -12,6 +12,8 @@ module.exports = gql`
         lease: Lease
         model: Model!
         vendor: Vendor!
+        employee: Employee
+        room: Room
     }
 
     extend type Query {
@@ -27,9 +29,9 @@ module.exports = gql`
 
     extend type Mutation {
         """Creates and adds a piece of equipment to the database"""
-        createEquipment(serial_number: String!, warranty_end_date: Date, active: Boolean!, lease_id: ID, model_id: ID!, vendor_id: ID!): Boolean!
+        createEquipment(serial_number: String!, warranty_end_date: Date, active: Boolean!, lease_id: ID, model_id: ID!, vendor_id: ID!, room_id: ID!, employee_id: ID!): Boolean!
         """Updates a piece of equipment that is associated with the given id"""
-        updateEquipment(equipment_id: ID!, serial_number: String!, warranty_end_date: Date, active: Boolean!, lease_id: ID, model_id: ID!, vendor_id: ID!): Boolean!
+        updateEquipment(equipment_id: ID!, serial_number: String!, warranty_end_date: Date, active: Boolean!, lease_id: ID, model_id: ID!, vendor_id: ID!, room_id: ID!, employee_id: ID!): Boolean!
         """Soft deletes a piece of equipment from the database"""
         deleteEquipment(id: ID!): Boolean!
         """Reactivates a piece of equipment in the database"""

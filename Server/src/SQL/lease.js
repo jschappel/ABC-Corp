@@ -12,7 +12,7 @@ async function getLease(id) {
     try{
         const sql = `SELECT * FROM lease WHERE lease_id = ?`
         const resultArray = await AuxQueries.selectQuery(connection, sql, [id])
-        if (resultArray.length < 1) throw( {sqlMessage: `No lease with id:${id} exists.`} )
+        if (resultArray.length < 1) return null
         else if(resultArray.length > 1) throw( {sqlMessage: `To many leases with id:${id}. Please contact database admin to resolve issue.`} )
         else {
             const result = resultArray[0]

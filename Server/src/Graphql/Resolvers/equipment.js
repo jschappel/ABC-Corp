@@ -3,7 +3,8 @@ const Equipment = require('../../SQL/equipment')
 const { getModel } = require('../../SQL/model')
 const { getVendor } = require('../../SQL/vendor')
 const { getLease } = require('../../SQL/lease')
-
+const { getEmployee } = require('../../SQL/employee')
+const { getRoom } = require('../../SQL/room')
 
 const resolvers = {
     Query: {
@@ -33,14 +34,14 @@ const resolvers = {
     }, 
 
     Mutation: {
-        createEquipment: (parent, {serial_number, warranty_end_date, active, lease_id, model_id, vendor_id} ) => {
-            return Equipment.createEquipment(serial_number, warranty_end_date, active, lease_id, model_id, vendor_id)
+        createEquipment: (parent, {serial_number, warranty_end_date, active, lease_id, model_id, vendor_id, room_id, employee_id} ) => {
+            return Equipment.createEquipment(serial_number, warranty_end_date, active, lease_id, model_id, vendor_id, room_id, employee_id)
             .then( result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
 
-        updateEquipment: (parent, {equipment_id, serial_number, warranty_end_date, active, lease_id, model_id, vendor_id} ) => {
-            return Equipment.updateEquipment(equipment_id, serial_number, warranty_end_date, active, lease_id, model_id, vendor_id)
+        updateEquipment: (parent, {equipment_id, serial_number, warranty_end_date, active, lease_id, model_id, vendor_id, room_id, employee_id} ) => {
+            return Equipment.updateEquipment(equipment_id, serial_number, warranty_end_date, active, lease_id, model_id, vendor_id, room_id, employee_id)
             .then( result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
@@ -73,6 +74,18 @@ const resolvers = {
 
         vendor: ({vendor_id}, args) => {
             return getVendor(vendor_id)
+            .then( result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)}) 
+        },
+
+        employee: ({ employee_id }) => {
+            return getEmployee(employee_id)
+            .then( result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)}) 
+        },
+
+        room: ({ room_id }) => {
+            return getRoom(room_id)
             .then( result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)}) 
         }

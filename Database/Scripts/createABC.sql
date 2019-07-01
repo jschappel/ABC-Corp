@@ -149,7 +149,6 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Account` (
   PRIMARY KEY (`account_id`),
   UNIQUE INDEX `account_id_UNIQUE` (`account_id` ASC) VISIBLE,
   INDEX `fk_account_role_idx` (`fk_role_id` ASC) VISIBLE,
-  UNIQUE INDEX `fk_role_id_UNIQUE` (`fk_role_id` ASC) VISIBLE,
   CONSTRAINT `fk_account_role`
     FOREIGN KEY (`fk_role_id`)
     REFERENCES `ABC`.`Role` (`role_id`)
@@ -294,12 +293,16 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Equipment` (
   `fk_model_id` SMALLINT(5) UNSIGNED NOT NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fk_room_id` SMALLINT(5) UNSIGNED NULL,
+  `fk_employee_id` SMALLINT(5) UNSIGNED NULL,
   PRIMARY KEY (`equipment_id`),
   UNIQUE INDEX `equipment_id_UNIQUE` (`equipment_id` ASC) VISIBLE,
   INDEX `vendor_id_idx` (`fk_vendor_id` ASC) VISIBLE,
   INDEX `type_id_idx` (`fk_model_id` ASC) VISIBLE,
   INDEX `lease_id_idx` (`fk_lease_id` ASC) VISIBLE,
   UNIQUE INDEX `serial_number_UNIQUE` (`serial_number` ASC) VISIBLE,
+  INDEX `fk_employee_id_idx` (`fk_employee_id` ASC) VISIBLE,
+  INDEX `fk_room_id_idx` (`fk_room_id` ASC) VISIBLE,
   CONSTRAINT `fk_equipment_vendor`
     FOREIGN KEY (`fk_vendor_id`)
     REFERENCES `ABC`.`Vendor` (`vendor_id`)
@@ -314,40 +317,17 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Equipment` (
     FOREIGN KEY (`fk_lease_id`)
     REFERENCES `ABC`.`Lease` (`lease_id`)
     ON DELETE RESTRICT
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ABC`.`Inventory`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ABC`.`Inventory` (
-  `inventory_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `fk_equipment_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT 'points to the equipment though the ID',
-  `fk_employee_id` SMALLINT(5) UNSIGNED NULL COMMENT 'points to the employee that is useing the equipment\nif null no one is useing it',
-  `fk_room_id` SMALLINT(5) UNSIGNED NULL,
-  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`inventory_id`),
-  UNIQUE INDEX `inventory_id_UNIQUE` (`inventory_id` ASC) VISIBLE,
-  UNIQUE INDEX `equipment_id_UNIQUE` (`fk_equipment_id` ASC) VISIBLE,
-  INDEX `employee_id_idx` (`fk_employee_id` ASC) VISIBLE,
-  INDEX `room_id_idx` (`fk_room_id` ASC) VISIBLE,
-  CONSTRAINT `fk_inventory_equipment`
-    FOREIGN KEY (`fk_equipment_id`)
-    REFERENCES `ABC`.`Equipment` (`equipment_id`)
-    ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_inventory_employee`
+  CONSTRAINT `fk_employee_id`
     FOREIGN KEY (`fk_employee_id`)
     REFERENCES `ABC`.`Employee` (`employee_id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_inventory_room`
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_room_id`
     FOREIGN KEY (`fk_room_id`)
     REFERENCES `ABC`.`Room` (`room_id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -394,35 +374,6 @@ CREATE TABLE IF NOT EXISTS `ABC`.`Reservation_equipment` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-USE `ABC`;
-
-DELIMITER $$
-USE `ABC`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ABC`.`Inventory_BEFORE_INSERT` BEFORE INSERT ON `Inventory` FOR EACH ROW
-BEGIN
-	IF(
-		(NEW.fk_employee_id is NULL and NEW.fk_room_id is NULL) 
-		or 
-		(NEW.fk_employee_id is not NULL and NEW.fk_room_id is not NULL)
-        )
-       then SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'invalid data';
-       END IF;
-END$$
-
-USE `ABC`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ABC`.`Inventory_BEFORE_UPDATE` BEFORE UPDATE ON `Inventory` FOR EACH ROW
-BEGIN
-	IF(
-		(NEW.fk_employee_id is NULL and NEW.fk_room_id is NULL) 
-		or 
-		(NEW.fk_employee_id is not NULL and NEW.fk_room_id is not NULL)
-        )
-       then SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'invalid data';
-       END IF;
-END$$
-
-
-DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

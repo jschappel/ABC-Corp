@@ -16,6 +16,7 @@ module.exports = gql`
         address: Address!
         office: Office!
         account: Account!
+        equipment: [Equipment!]!
 
     }
 
