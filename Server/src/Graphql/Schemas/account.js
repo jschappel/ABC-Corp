@@ -7,7 +7,7 @@ module.exports = gql`
         date_created: String!
         last_update: String!
         username: String!
-        password: String
+        password: String!
         role: Role!
     }
 
@@ -25,6 +25,7 @@ module.exports = gql`
         createAccount(username: String!, password: String!, role_id: ID!): Boolean!
         """Updates the account that is associated with the given id"""
         updateAccount(id: ID!, username: String!, password: String!, role_id: ID!): Boolean!
+        """Authenticates a user by making user the data provided matches the data on file"""
+        login(username: String!, password: String!): Account!
     }
-
 `

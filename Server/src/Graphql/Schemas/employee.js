@@ -17,7 +17,6 @@ module.exports = gql`
         office: Office!
         account: Account!
         equipment: [Equipment!]!
-
     }
 
     extend type Query {

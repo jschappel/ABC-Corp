@@ -17,6 +17,7 @@ const roomSchema = require('./room')
 const leaseSchema = require('./lease')
 const equipmentSchema = require('./equipment')
 const dateScalarSchema = require('./Scalars/date')
+const authPayloadSchema = require('./authPayload.js')
 
 const linkSchema = gql`
     type Query{
@@ -49,5 +50,6 @@ const combineSchema = [
     leaseSchema,
     dateScalarSchema,
     equipmentSchema,
+    authPayloadSchema,
 ]
 module.exports = combineSchema

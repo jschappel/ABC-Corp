@@ -1,4 +1,4 @@
-const {UserInputError} = require('apollo-server-express')
+const { UserInputError } = require('apollo-server-express')
 const Address = require('../../SQL/address')
 const { getCity } = require('../../SQL/city')
 

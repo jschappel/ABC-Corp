@@ -20,14 +20,20 @@ const resolvers = {
 
     Mutation: {
         createAccount: (parent, {username, password, role_id}) => {
-            return Account.createAccount(username,password, role_id)
-            .then( result => result)
+            return Account.signUp(username, password, role_id)
+            .then(result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         },
 
         updateAccount: (parent, {id, username, password, role_id}) => {
             return Account.updateAccount(id, username, password, role_id)
             .then( result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        },
+
+        login: (parent, { username, password }, context) => {
+            return Account.login(username, password)
+            .then(result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
     },

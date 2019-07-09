@@ -65,9 +65,45 @@ function insertOrUpdateQuery(db_connection, sql, args_array) {
     })
 }
 
+/**
+ * insertWithResponse: A auxiliary function for a insert MySQL Query
+ * @param {Database connect} db_connection the database connection
+ * @param {String} sql a string/template literal containing the sql query
+ * @param {*} args_array an array of data that will be placed into the sql string placeholders
+ * @return {Promise} A promise containing the ID of the inserted row.
+ */
+function insertWithResponse(db_connection, sql, args_array) {
+    return new Promise( ( resolve, reject ) => {
+        db_connection.beginTransaction( error => {
+            if(error){
+                return db_connection.rollback(() => {
+                    reject(error)
+                })
+            }
+            db_connection.query(sql, args_array, ( error, results, fields ) => {
+                if(error){
+                    return db_connection.rollback(() => {
+                        reject(error)
+                    })
+                }
+                const accountID = results.insertId
+                db_connection.commit( error => {
+                    if(error){
+                        return db_connection.rollback(() => {
+                            reject(error)
+                        })
+                    }
+                    resolve(accountID)
+                })
+            })
+        })
+    })
+}
+
 
 module.exports = {
     selectQuery,
     insertOrUpdateQuery,
     deleteQuery,
+    insertWithResponse
 }

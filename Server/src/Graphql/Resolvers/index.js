@@ -15,6 +15,7 @@
  const leaseResolvers = require('./lease')
  const equipmentResolvers = require('./equipment')
  const dateScalarResolvers = require('./Scalars/date')
+ //const authPayloadResolvers = require('./authPayload')
 
  const combinedResolvers = [
      countryResolvers,
@@ -31,6 +32,7 @@
      leaseResolvers,
      equipmentResolvers,
      dateScalarResolvers,
+     //authPayloadResolvers,
     ]
 
  module.exports = combinedResolvers

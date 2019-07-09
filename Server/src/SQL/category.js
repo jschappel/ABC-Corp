@@ -1,5 +1,5 @@
 const connection = require('../Database/database')
-const AuxQuery = require('./abstract_queries')
+const AuxQuery = require('./utils/abstract_queries')
 
 
 /* --- Queries --- */

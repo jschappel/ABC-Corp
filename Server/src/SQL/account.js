@@ -1,5 +1,8 @@
 const connection = require('../Database/database')
-const AuxQueries = require('./abstract_queries')
+const AuxQueries = require('./utils/abstract_queries')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const { APP_SECRET } = require('./utils/utils')
 
 /* --- Queries --- */
 
@@ -98,9 +101,133 @@ async function updateAccount(account_id, username, password, role_id) {
     }
 }
 
+
+/**
+ * signUp: Adds a account to the database
+ * @param {String} username The username of the account
+ * @param {String} password The password of the account
+ * @param {String} roleID The id associated with the roles that the account will have
+ * @returns {Promise} A Promise that contains an account object.
+ */
+async function signUp(username, password, roleID) {
+    try{
+        const sql = `INSERT INTO account(username, password, fk_role_id) VALUES(?, ?, ?)`
+        // encrypt password
+        const hashedPassword = await bcrypt.hash(password, 10)
+        // add account to the database
+        await AuxQueries.insertWithResponse(connection, sql, [username, hashedPassword, roleID])
+        return true
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+}
+
+
+/**
+ * login: Determines of the given username and password fit an account in the database
+ * @param {String} username The username of the account
+ * @param {String} password The password of the account
+ * @returns {Promise} A Promise that contains an account object.
+ */
+async function login(username, password) {
+    try{
+        const sql = `SELECT * FROM account WHERE username = ?`
+        const accountArray = await AuxQueries.selectQuery(connection, sql, [username])
+        if(accountArray.length === 0) throw( {sqlMessage: `No account found!`} )
+        else{
+            const account = accountArray[0]
+
+            // compare passwords
+            const valid = await bcrypt.compare(password, account.password)
+            if(!valid) throw( {sqlMessage: `Invalid password`})
+            
+            return {
+                id: account.account_id,
+                date_created: account.date_created,
+                last_update: account.last_update,
+                username: account.username,
+                password: account.password,
+                role_id: account.fk_role_id
+            }
+        }
+    }
+    catch(error){
+        return Promise.reject(error)
+    }   
+}
+
+
+
+/* NOTICE
+    below are functions that may be used for future addition to the API. They pertain to
+    authentication to access certain QUERIES AND MUTATIONS.
+/*
+
+/**
+ * signUp: Adds a account to the database
+ * @param {String} username The username of the account
+ * @param {String} password The password of the account
+ * @param {String} roleID The id associated with the roles that the account will have
+ * @returns {Promise} A Promise that contains a token and account object.
+ */
+async function signUp2(username, password, roleID) {
+    try{
+        const sql = `INSERT INTO account(username, password, fk_role_id) VALUES(?, ?, ?)`
+        // encrypt password
+        const hashedPassword = await bcrypt.hash(password, 10)
+        // add account to the database
+        const accountID = await AuxQueries.insertWithResponse(connection, sql, [username, hashedPassword, roleID])
+        // get the added accounts information from the database
+        const account = await getAccount(accountID)
+        // Create a JSON Web Token 
+        const token = jwt.sign({ accountId: accountID}, APP_SECRET)
+        return {
+            token,
+            account
+        }
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+}
+
+/**
+ * login: Determines of the given username and password fit an account in the database
+ * @param {String} username The username of the account
+ * @param {String} password The password of the account
+ * @returns {Promise} A Promise that contains a token and account object.
+ */
+async function login2(username, password) {
+    try{
+        const sql = `SELECT * FROM account WHERE username = ?`
+        const accountArray = await AuxQueries.selectQuery(connection, sql, [username])
+        if(accountArray.length === 0) throw( {sqlMessage: `No account found!`} )
+        else if(accountArray.length > 1) throw( {sqlMessage: `To many accounts with username:${username}. Please contact database admin to resolve issue.`} )
+        else{
+            const account = accountArray[0]
+            // compare passwords
+            const valid = await bcrypt.compare(password, account.password)
+            if(!valid) throw( {sqlMessage: `Invalid password`})
+            // Generate a JSON Web Token
+            const token = jwt.sign({accountId: account.id}, APP_SECRET)
+            
+            return{
+                token,
+                account
+            }
+        }
+    }
+    catch(error){
+        Promise.reject(error)
+    }   
+}
+
 module.exports = {
     getAccount,
     getAccounts,
     createAccount,
     updateAccount,
+    signUp,
+    login,
 }
