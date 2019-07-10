@@ -23,7 +23,11 @@
   color:  #282c34;
 }
 
-#login-input {
+#login-input-username {
+  width: 300px;
+}
+
+#login-input-password {
   width: 300px;
 }
 

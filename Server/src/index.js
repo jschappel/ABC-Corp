@@ -4,6 +4,7 @@ const resolvers = require('./Graphql/Resolvers/index')
 //const models = require('./SQL/index')
 const typeDefs = require('./Graphql/Schemas/index')
 const jwt = require('express-jwt')
+const { tradeTokenForAccount } = require('./SQL/utils/utils')
 
 const app = express()
 
@@ -25,10 +26,13 @@ const schema = makeExecutableSchema({
 */
 const server = new ApolloServer({
     schema,
-    /* context: {
-        models, // Models is passed to the resolvers as context
-        me: models.users[1] // Simulates a user that is logged in
-    } */
+    context: async ({ req }) => {
+        const token = req.headers.authorization || ''
+        const account = await tradeTokenForAccount(token)
+        return {
+            account
+        }
+    }
 })
 
 // Add express as middleware

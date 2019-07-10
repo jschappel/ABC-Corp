@@ -133,6 +133,41 @@ async function getEmployeeEquipment(id) {
 }
 
 
+/**
+ * getEmployeeByAccountID: Gets the employee that is associated with a specific account
+ * @param {String} accountID The id of the account that is associated with an employee
+ * @return {Promise} The promise contains an employee object.
+ */
+async function getEmployeeByAccountID(accountID) {
+    try {
+        const sql = `SELECT * FROM employee where fk_account_id = ?`
+        const resultArray = await AuxQueries.selectQuery(connection, sql, [accountID])
+        if (resultArray.length < 1) return null
+        else if(resultArray.length > 1) throw( {sqlMessage: `More than one employees has account id:${id} associated with it. Please contact database admin to resolve issue.`} )
+        else {
+            const employee = resultArray[0]
+            return {
+                id: employee.employee_id,
+                date_created: employee.date_created,
+                last_update: employee.last_update,
+                first_name: employee.first_name,
+                last_name: employee.last_name,
+                phone_number: employee.phone_number,
+                work_phone_number: employee.work_phone_number,
+                email: employee.email,
+                active: employee.active,
+                address_id: employee.fk_address_id,
+                office_id: employee.fk_office_id,
+                account_id: employee.fk_account_id
+            }
+        }
+    }
+    catch(error) {
+        return Promise.reject(error)
+    }
+}
+
+
 /* --- Mutations --- */
 
 /**
@@ -230,4 +265,5 @@ module.exports = {
     deleteEmployee,
     activateEmployee,
     getEmployeeEquipment,
+    getEmployeeByAccountID,
 }

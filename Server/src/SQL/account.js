@@ -205,12 +205,21 @@ async function login2(username, password) {
         if(accountArray.length === 0) throw( {sqlMessage: `No account found!`} )
         else if(accountArray.length > 1) throw( {sqlMessage: `To many accounts with username:${username}. Please contact database admin to resolve issue.`} )
         else{
-            const account = accountArray[0]
+            const theAccount = accountArray[0]
             // compare passwords
-            const valid = await bcrypt.compare(password, account.password)
+            const valid = await bcrypt.compare(password, theAccount.password)
             if(!valid) throw( {sqlMessage: `Invalid password`})
             // Generate a JSON Web Token
-            const token = jwt.sign({accountId: account.id}, APP_SECRET)
+            const token = jwt.sign({ accountId: theAccount.account_id }, APP_SECRET)
+            // Make the new account object with the correct keys
+            const account = {
+                id: theAccount.account_id,
+                date_created: theAccount.date_created,
+                last_update: theAccount.last_update,
+                username: theAccount.username,
+                password: theAccount.password,
+                role_id: theAccount.fk_role_id
+            }
             
             return{
                 token,
@@ -219,7 +228,7 @@ async function login2(username, password) {
         }
     }
     catch(error){
-        Promise.reject(error)
+        return Promise.reject(error)
     }   
 }
 
@@ -230,4 +239,5 @@ module.exports = {
     updateAccount,
     signUp,
     login,
+    login2,
 }

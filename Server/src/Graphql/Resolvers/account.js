@@ -1,10 +1,23 @@
 const {UserInputError} = require('apollo-server-express')
 const Account = require('../../SQL/account')
 const { getRole } = require('../../SQL/role')
+const { getEmployeeByAccountID } = require('../../SQL/employee')
 
 
 const resolvers = {
     Query: {
+        me: (parent, args, context) => {
+            if(context.account){
+                return Account.getAccount(context.account)
+                .then( result => result)
+                .catch(error => {throw new UserInputError(error.sqlMessage)})
+            }
+            else {
+                throw new Error(`You are not authenticated`)
+            }
+            
+        },
+
         account: (parent, {id}) => {
             return Account.getAccount(id)
             .then( result => result)
@@ -32,7 +45,7 @@ const resolvers = {
         },
 
         login: (parent, { username, password }, context) => {
-            return Account.login(username, password)
+            return Account.login2(username, password)
             .then(result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         }
@@ -41,6 +54,12 @@ const resolvers = {
     Account: {
         role: (parent) => {
             return getRole(parent.role_id)
+            .then( result => result)
+            .catch(error => {throw new UserInputError(error.sqlMessage)})
+        },
+
+        employee: ({ id }, args) => {
+            return getEmployeeByAccountID(id)
             .then( result => result)
             .catch(error => {throw new UserInputError(error.sqlMessage)})
         }

@@ -15,18 +15,36 @@ class App extends Component {
     /** State Variables
      * - loggedIn: determines if the user is logged in: originally set to false and is set to true on a successful login.
      * - userId: the employee id of the user that is logged in. Initially set to null and is updated upon a successful login.
+     * - token: the jwt token supplied from the graphql API for validation.
      */
     this.state = {
       loggedIn: true,
-      userId: null
+      userId: null,
+      token: null,
     }
+    this.loginHandler = this.loginHandler.bind(this)
+  }
+
+  /**
+   * loginHandler: allows a child componet to change the state of its parent
+   * @param {String} userId The MySQL id of the loggin user
+   * @param {String} token The JWT token of the loggin in user to be used for validation
+   */
+  loginHandler(userId, token) {
+    console.log(`userId: ${userId}`)
+    console.log(`token: ${token}`)
+    this.setState({
+      loggedIn: true,
+      userId,
+      token,
+    })
   }
 
   render() {
     return (
       <BrowserRouter>
           <Switch>
-            <Route exact path='/' component={Login} />
+            <Route exact path='/' render={(props) => <Login {...props} handler={this.loginHandler}/>} />
             <ProtectedRoute exact path='/home' component={Home} state={this.state}/>
             <ProtectedRoute exact path='/employee' component={Employee} state={this.state}/>
             <ProtectedRoute exact path='/inventory' component={Inventory} state={this.state}/>

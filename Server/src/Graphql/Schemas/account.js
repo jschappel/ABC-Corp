@@ -9,6 +9,7 @@ module.exports = gql`
         username: String!
         password: String!
         role: Role!
+        employee: Employee
     }
 
     extend type Query {
@@ -26,6 +27,6 @@ module.exports = gql`
         """Updates the account that is associated with the given id"""
         updateAccount(id: ID!, username: String!, password: String!, role_id: ID!): Boolean!
         """Authenticates a user by making user the data provided matches the data on file"""
-        login(username: String!, password: String!): Account!
+        login(username: String!, password: String!): AuthPayload!
     }
 `
