@@ -8,15 +8,42 @@ class Home extends Component {
 
     constructor(props){
         super(props)
+        
+        /** State Variables
+         * - isLoading: boolean value to determine if the view is loading. Initially set to true
+         * - firstName: logged in users first name.
+         * - lastName: logged in users last name.
+         */
+        this.state = {
+            isLoading: true,
+            firstName: null,
+            lastName: null,
 
+        }
 
         this.userInfo = this.props.rest
     }
 
 
-    render(){
-        console.log(this.userInfo)
+    componentDidMount() {
+        fetch('/graphql', {
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.userInfo.token
+            },
+            body: userQuery
+        })
+        .then( response => response.json())
+        .then( ({data}) => {
+            const employee = data.me.employee
+            console.log(employee)
+        })
+        .catch(error => console.log('Error fetching the data', error))
+    }
 
+
+    render(){
         return (
             <div>
                 <Navigation />
@@ -32,6 +59,31 @@ class Home extends Component {
                 </div>
             </div>
         )
-    }    
+    }
 }
+
+const userQuery =  JSON.stringify({
+    query: `query {
+        me {
+          employee {
+            first_name
+            last_name
+            equipment {
+              id
+              serial_number
+              model {
+                model_name
+                category {
+                  category
+                }
+              }
+              lease {
+                lease_end
+              }
+            }
+          }
+        }
+      }`
+})
+
 export default Home

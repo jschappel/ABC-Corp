@@ -58,6 +58,12 @@ class Login extends Component {
                         login(username: "${this.state.username}", password: "${this.state.password}") {
                             token
                             account {
+                                role{
+                                    create
+                                    read
+                                    update
+                                    delete
+                                }
                                 employee {
                                     id
                                 }
@@ -97,16 +103,16 @@ class Login extends Component {
         event.target.className += " was-validated"
         if(this.state.username && this.state.password) {
             return this.loginRequest()        
-            .then(data => {
+            .then( data => {
                 if(data) {
                     // Set the state of parent using the handler and then move on the the home page
-                    this.props.handler(data.account.employee, data.token)
+                    this.props.handler(data.account.employee.id, data.token, data.account.role)
                     return this.props.history.push('/home')
                 }
             })
             .catch(error => console.log(`The was an error processing the data from the function loginRequest`, error))
             } else{
-                this.setState({message: "Please fill in both username and passord fields."})
+                this.setState({message: "Please fill in both username and password fields."})
             }
     }
 

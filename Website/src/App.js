@@ -16,27 +16,31 @@ class App extends Component {
      * - loggedIn: determines if the user is logged in: originally set to false and is set to true on a successful login.
      * - userId: the employee id of the user that is logged in. Initially set to null and is updated upon a successful login.
      * - token: the jwt token supplied from the graphql API for validation.
+     * - roles: the roles(permissions) that the logged in user has
      */
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       userId: null,
       token: null,
+      roles: null,
     }
     this.loginHandler = this.loginHandler.bind(this)
   }
 
   /**
-   * loginHandler: allows a child componet to change the state of its parent
-   * @param {String} userId The MySQL id of the loggin user
-   * @param {String} token The JWT token of the loggin in user to be used for validation
+   * loginHandler: allows a child component to change the state of its parent
+   * @param {String} userId The MySQL id of the logged in  user
+   * @param {String} token The JWT token of the logged in user to be used for validation
+   * @param {Object} roles Object containing the roles of the user
    */
-  loginHandler(userId, token) {
+  loginHandler(userId, token, roles) {
     console.log(`userId: ${userId}`)
     console.log(`token: ${token}`)
     this.setState({
-      loggedIn: true,
+      loggedIn: !this.state.loggedIn,
       userId,
       token,
+      roles,
     })
   }
 

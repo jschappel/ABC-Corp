@@ -31,6 +31,10 @@
   width: 300px;
 }
 
+#loginErr {
+  color: #ff0000;
+}
+
 /* Fade in for home page */
 @keyframes page-load-in {
   0% {
