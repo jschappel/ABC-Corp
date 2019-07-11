@@ -142,13 +142,14 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `ABC`.`Account` (
   `account_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL COMMENT 'the username for employee to log into database',
-  `password` VARCHAR(45) NOT NULL COMMENT 'password for employee to login',
+  `password` VARCHAR(128) NOT NULL COMMENT 'password for employee to login',
   `fk_role_id` SMALLINT(5) UNSIGNED NOT NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`account_id`),
   UNIQUE INDEX `account_id_UNIQUE` (`account_id` ASC) VISIBLE,
   INDEX `fk_account_role_idx` (`fk_role_id` ASC) VISIBLE,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   CONSTRAINT `fk_account_role`
     FOREIGN KEY (`fk_role_id`)
     REFERENCES `ABC`.`Role` (`role_id`)

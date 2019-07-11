@@ -117,12 +117,7 @@ VALUES ("2013-08-05 18:19:03", "2016-08-05 18:19:03", 1),
         ("2016-08-05 18:19:45", "2019-08-05 18:19:23",2);
 INSERT INTO role(role, c, r, u, d)
 VALUES ("root", 1, 1, 1, 1),
-		("user", 0, 1, 0, 0);        
-        
-INSERT INTO account(username, password, fk_role_id)
-VALUES ("bigPapa", "passowrd", 1),
-		("account2", "passowrd", 2),
-        ("account3", "passowrd", 2);
+		("user", 0, 1, 0, 0);
         
         
 INSERT INTO employee(first_name, last_name, phone_number, work_phone_number, email, active, fk_address_id, fk_office_id, fk_account_id)
