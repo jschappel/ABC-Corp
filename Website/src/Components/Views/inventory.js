@@ -19,7 +19,7 @@ class Inventory extends Component {
             <Navigation />
             <div className="view-container">
                 <div className='container-fluid' id='home-container'>
-                    <div className='flex-row'>
+                    <div className='flex-row pt-1'>
                         <ViewNavigation />
                     </div>
                     <div className='row justify-content-center'>

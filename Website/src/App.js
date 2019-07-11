@@ -34,8 +34,6 @@ class App extends Component {
    * @param {Object} roles Object containing the roles of the user
    */
   loginHandler(userId, token, roles) {
-    console.log(`userId: ${userId}`)
-    console.log(`token: ${token}`)
     this.setState({
       loggedIn: !this.state.loggedIn,
       userId,

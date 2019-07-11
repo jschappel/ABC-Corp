@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import ABCLogo from '../../Images/ABCLogo2.png'
 
 class Navigation extends Component {
@@ -34,7 +34,7 @@ class Navigation extends Component {
     render() {
         const show = (this.state.menu) ? "show" : ""
         return (
-            <nav className="navbar navbar-expand-sm navbar-dark bg-abc-dark-blue">
+            <nav className="navbar navbar-expand-sm navbar-dark bg-abc-blue">
                <img src={ABCLogo} width="80" height="40" alt=""/>
                 <button className="navbar-toggler" type="button" name="menu" onClick={this.toggleMenu} data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" name="menu" onClick={this.toggleMenu}></span>
@@ -42,10 +42,10 @@ class Navigation extends Component {
                 <div className={"collapse navbar-collapse " + show} id="navbarNavDropdown">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <NavLink className='nav-link' to='/' exact>Account Settings</NavLink>
+                            <NavLink className='nav-link text-abc-dark-blue' to='/' exact>Account Settings</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className='nav-link' to='/' exact>Logout</NavLink>
+                            <NavLink className='nav-link text-abc-dark-blue' to='/' exact>Logout</NavLink>
                         </li>
                     </ul>
                 </div>

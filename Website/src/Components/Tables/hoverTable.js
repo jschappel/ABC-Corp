@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CheckedRow from './TableRows/checkedRow'
+import CheckedRow from './TableComponents/checkedRow'
 import '../../CSS/Components/table_headers.css'
 class HoverTable extends Component {
 
@@ -8,7 +8,6 @@ class HoverTable extends Component {
     render() {
         console.log(this.props.data)
         return(
-            
             <table className="table table-hover">
                 <thead>
                     <tr>

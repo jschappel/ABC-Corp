@@ -8,7 +8,7 @@
 }
 
 #home-container {
-    background-color: aliceblue;
-    /*border: 1px solid black; */
+    background: whitesmoke;
+    border: .5px solid #8c8d8f;
     border-radius: 10px;
 }
