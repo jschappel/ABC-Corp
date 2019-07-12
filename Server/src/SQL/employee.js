@@ -109,7 +109,8 @@ async function getEmployeesByStatus(status) {
  */
 async function getEmployeeEquipment(id) {
     try {
-        const sql = `SELECT * FROM equipment WHERE fk_employee_id = ?`
+        //const sql = `SELECT * FROM equipment WHERE fk_employee_id = ? AND active = 1 JOIN model`
+        const sql = `SELECT * FROM equipment e JOIN model m ON e.fk_model_id = m.model_id WHERE e.fk_employee_id = ? AND e.active = 1 ORDER BY m.model_name ASC`
         const resultArray = await AuxQueries.selectQuery(connection, sql, [id])
         return resultArray.map( obj => {
             return {

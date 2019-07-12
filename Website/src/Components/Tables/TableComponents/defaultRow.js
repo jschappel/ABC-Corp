@@ -19,7 +19,7 @@ class CheckedRow extends Component {
 
     render() {
         return(
-            <tr>
+            <tr id={this.props.data.id} onClick={(event) => this.props.onClick(event)}>
                 {
                     this.rowCreate(this.props.data)
                 }
