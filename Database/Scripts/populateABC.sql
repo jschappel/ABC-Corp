@@ -97,7 +97,12 @@ INSERT INTO model(model_name, model_number, fk_category_id)
 VALUES ("MacBook Pro 2012","MD101xx/A MD102xx/A",3),
 		("MacBook Air 2018","A1932 (EMC 3184)", 3),
         ("IPhone 6s","A1633", 1),
-        ("Epson VS250","VS250",4);
+        ("Epson VS250","VS250",4),
+        ("HP Spectre x360","SD2017846 MD102xx/A",3),
+        ("Pixel 3a","F67463", 1),
+        ("Galaxy s9","S48627", 1),
+        ("Dell Inspiron","Z57022",2);
+
         
 INSERT INTO Office(office, phone_number, equipment_contact, fk_address_id, active)
 VALUES ("Office 1", "908-555-6677", "908-333-4422", 2, 1),
@@ -125,7 +130,6 @@ VALUES ("Joshua", "Schappel", "9083708410", "9087891882", "jmschappel12@gmail.co
 		("Dana", "Riback", "8628994666", "9086757746", "d.riback@gmail.com", 1, 9, 1, 2),
         ("Sam", "Schappel", "9086675463", "9807785564", "sammySchappel@gmail.com", 1, 10, 2, 3);
        
-SELECT * FROM employee;
         
 INSERT INTO equipment(serial_number, active, warranty_end_date, fk_lease_id, fk_vendor_id, fk_model_id, fk_room_id, fk_employee_id)
 VALUES ("EAnxMyEu", 1, "2019-08-05 18:19:23", 2, 1, 1, null, null),
@@ -133,8 +137,12 @@ VALUES ("EAnxMyEu", 1, "2019-08-05 18:19:23", 2, 1, 1, null, null),
 		("UjPLHCsS", 1, "2019-08-05 18:19:23", 2, 1, 1, 1, 1),
 		("7cKWUyNC", 1, "2019-08-05 18:19:23", 2, 1, 1, 1, 1),
         ("xZ8mSVb5", 1, "2019-08-05 18:19:23", 3, 2, 2, 2, 1),
+        
+        ("s45Xy4572", 1, "2019-10-05 18:19:23", 3, 2, 5, 2, 1),
+        ("au67T32W", 1, "2019-10-05 18:19:23", 3, 2, 6, 2, 1),
+        ("yt6732D3", 1, "2019-10-05 18:19:23", 3, 2, 7, 2, 1),
+        ("pt75E3E1", 1, "2019-10-05 18:19:23", 3, 2, 8, 2, 1),
+        
         ("eMnogAz9", 1, "2019-08-05 18:19:23", 3, 2, 3, 3, 3),
         ("3QoqNm2B", 1, "2019-08-05 18:19:23", 3, 2, 4, 2, 2),
         ("wH56uxHE", 1, "2019-08-05 18:19:23", 3, 2, 3, 3, 3);
-        
-SELECT * FROM equipment;
