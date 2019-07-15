@@ -108,4 +108,13 @@ class EquipmentTable extends Component{
     }
 }
 
-export default EquipmentTable
+
+/**
+ * withNullData: Given a table will render the table if there is data otherwise will render a message
+ * @param {Component} Component The component that you wish to apply the function to
+ */
+const withNullData = (Component) => (props) =>{
+    return props.data ? <Component {...props} /> : <p>Sorry you do not own any equipment yet</p>
+}
+
+export default withNullData(EquipmentTable)

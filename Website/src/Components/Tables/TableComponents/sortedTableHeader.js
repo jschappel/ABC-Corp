@@ -56,8 +56,8 @@ class sortedTableHeader extends Component {
 
     render() {
         return(
-            <th scope='col' className={this.props.className} onClick={() => this.handleClick()}>
-            <i className='mr-1'>{this.bothArrow}</i>
+            <th scope='col' className={this.props.className}>
+            <i className='mr-1' style={{cursor:'pointer'}} onClick={() => this.handleClick()}>{this.bothArrow}</i>
             {this.props.title}</th>
         )
     }

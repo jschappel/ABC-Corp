@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import Loading from '../Utils/loading'
 
 class EquipmentModal extends Component {
     
@@ -6,6 +7,7 @@ class EquipmentModal extends Component {
         super(props)
 
         this.state = {
+            isLoading: true,
             model_title: null,
             model_number: null,
             serial_number: null,
@@ -33,8 +35,8 @@ class EquipmentModal extends Component {
         .then( results => results.json())
         .then( ({data}) => {
             const tableData = data.equipmentSingle
-            console.log(tableData)
             this.setState({
+                isLoading: false,
                 modal_title: tableData.model.model_name,
                 model_number: tableData.model.model_number,
                 serial_number: tableData.serial_number,
@@ -59,16 +61,16 @@ class EquipmentModal extends Component {
                 aria-label="exampleModalLabel"
                 aria-hidden="true"
             >
-                <div className="modal-dialog modal-lg" role="document">
+                <div className="modal-dialog modal-dialog-centered modal-md" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">{this.state.model_title}</h5>
+                            <h4 className="modal-title" id="exampleModalLabel">{this.state.modal_title}</h4>
                             <button type="button" className="close" onClick={() => this.props.toggleModal()} aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
-                            <p>Body goes below</p>
+                            <ModalBody data={this.state} />
                         </div>
                     </div>
                 </div>
@@ -111,5 +113,76 @@ const equipmentFetch = (id) => {
           }`
     })
 }
+
+/**
+ * modalBody: The body for the modal 
+ * @param {Object} props The props to pass to the component
+ */
+const modalBody = ({data}) => {
+    console.log(data)
+    return(
+        <Fragment>
+            <h5>Item Specifics</h5>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Model Number: <strong>{data.model_number}</strong></p>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Serial Number: <strong>{data.serial_number}</strong></p>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Warranty End Data: <strong>{data.warranty_end}</strong></p>
+                </div>
+            </div>
+
+            <h6>Location Information</h6>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Office Name: <strong>{data.office_name}</strong></p>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-3'>
+                    <p>-  Floor: <strong>{data.floor}</strong></p>
+                </div>
+                <div className='col-sm-3'>
+                    <p>- Room: <strong>{data.room}</strong></p>
+                </div>
+            </div>
+
+            <h6>Lease Information</h6>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Leased From: <strong>{data.vendor_name}</strong></p>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Lease Start Date: <strong>{data.lease_start}</strong></p>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <p>-  Lease End Date: <strong>{data.lease_end}</strong></p>
+                </div>
+            </div>    
+        </Fragment>
+    )
+}
+
+/**
+ * withLoadingModal: Renders a loading screen if needed
+ * @param {Component} Component The component to apply the function to
+ */
+const withLoadingModal = (Component) => (props) => {
+    return props.data.isLoading ? <Loading /> : <Component {...props} />
+}
+
+const ModalBody = withLoadingModal(modalBody)
+
 
 export default EquipmentModal

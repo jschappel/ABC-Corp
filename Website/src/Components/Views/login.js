@@ -104,11 +104,10 @@ class Login extends Component {
         if(this.state.username && this.state.password) {
             return this.loginRequest()        
             .then( data => {
-                if(data) {
-                    // Set the state of parent using the handler and then move on the the home page
-                    this.props.handler(data.account.employee.id, data.token, data.account.role)
-                    return this.props.history.push('/home')
-                }
+                const id = data.account.employee === null ? null : data.account.employee.id
+                // Set the state of parent using the handler and then move on the the home page
+                this.props.handler(id , data.token, data.account.role)
+                return this.props.history.push('/home')
             })
             .catch(error => console.log(`The was an error processing the data from the function loginRequest`, error))
             } else{

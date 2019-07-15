@@ -3,7 +3,8 @@ import Navigation from '../Navbars/account_navigation'
 import ViewNavigation from '../Navbars/view_navigation'
 import '../../CSS/container.css'
 import Loading from '../Utils/loading'
-import Equipment from '../Tables/employeeEquipment'
+import EquipmentTable from '../Tables/employeeEquipment'
+import WelcomeMessage from '../Other/welcome'
 
 
 class Home extends Component {
@@ -20,7 +21,7 @@ class Home extends Component {
         this.state = {
             isLoading: true,
             firstName: null,
-            equipmentArray: [],
+            equipmentArray: null,
 
         }
 
@@ -42,6 +43,10 @@ class Home extends Component {
         })
         .then( response => response.json())
         .then( ({data}) => {
+            if(!data.me.employee){
+                this.setState({isLoading: false})
+                return
+            }
             const employee = data.me.employee
             // extract the data
             const equipment = employee.equipment.map( item => {
@@ -61,21 +66,26 @@ class Home extends Component {
      * isLoaded: determines what components should be rendered based on if the fetch is complete.
      */
     isLoaded() {
+
         if(this.state.isLoading){
-            return (<Loading />)
+            return (
+                <div id='loader-position'>
+                    <Loading />
+                </div>
+            )
         }
         else {
             return(
-                <Fragment>
+                <div className='row justify-content-center mt-3 pr-1'>
                     <WelcomeMessage firstName={this.state.firstName}/>
-                    <Equipment
+                    <EquipmentTable
                         data={this.state.equipmentArray}
                     />
-                </Fragment>
+                </div>
             )
         }
     }
-
+    
     render(){
         return (
             <div>
@@ -83,17 +93,21 @@ class Home extends Component {
                 <div className="view-container">
                     <div className='container-fluid' id='home-container'>
                         <div className='flex-row pt-1'>
-                            <ViewNavigation active={"home"} />
+                            <ViewNavigation roles={'Hello world!!!'} active={"home"} />
                         </div>
-                        <div className='row justify-content-center mt-3 pr-1'>
                             {this.isLoaded()}
-                        </div>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+
+
+
+
+
 
 // Query to get users equipment data
 const userQuery =  JSON.stringify({
@@ -119,14 +133,5 @@ const userQuery =  JSON.stringify({
       }`
 })
 
-/**
- * WelcomeMessage: Stateless component that displays the first and last name of a user
- * @param {React Props} props Props containing 'firstName' and 'lastName'.
- */
-const WelcomeMessage = (props) => {
-    return(
-        <h1 style={{color:'#282c34'}}>Welcome {props.firstName} {props.lastName}</h1>
-    )
-}
 
 export default Home

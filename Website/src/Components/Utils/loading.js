@@ -1,11 +1,9 @@
 import React from 'react'
-
+import '../../CSS/Utils/loader.css'
 
 function loading() {
     return(
-        <div className='row justify-content-center'>
-            <h1>Loading...</h1>
-        </div>
+        <div className='mt-5 mb-5 loader'></div>
     )
 }
 
