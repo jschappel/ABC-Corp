@@ -20,7 +20,7 @@ class Inventory extends Component {
             <div className="view-container">
                 <div className='container-fluid' id='home-container'>
                     <div className='flex-row pt-1'>
-                        <ViewNavigation />
+                        <ViewNavigation roles={this.props.rest.roles}/>
                     </div>
                     <div className='row justify-content-center'>
                         <p>Hello World!</p>

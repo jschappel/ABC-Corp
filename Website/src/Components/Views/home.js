@@ -87,13 +87,14 @@ class Home extends Component {
     }
     
     render(){
+        console.log(this.props.rest.roles)
         return (
             <div>
                 <Navigation />
                 <div className="view-container">
                     <div className='container-fluid' id='home-container'>
                         <div className='flex-row pt-1'>
-                            <ViewNavigation roles={'Hello world!!!'} active={"home"} />
+                            <ViewNavigation roles={this.props.rest.roles} active={"home"} />
                         </div>
                             {this.isLoaded()}
                     </div>

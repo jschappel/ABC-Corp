@@ -11,8 +11,8 @@ class Login extends Component {
         super(props)
     
         /** State variables:
-         * - username: the username for the login credentials. Initially set to empty
-         * - password: the password for the login credentials. Initially set to empty
+         * - username: the username for the login credentials. Initially set to empty.
+         * - password: the password for the login credentials. Initially set to empty.
          * - message: a string that tells the user if their log in credentials were wrong.
          *    Message is initially empty and will only change if the server fails to log the user in
          */     
@@ -47,7 +47,7 @@ class Login extends Component {
     }
 
     /**
-     * loginRequest: Sends a fetch request to the server inorder to see if the user tying to login
+     * loginRequest: Sends a fetch request to the server in order to see if the user tying to login
      *  is using the correct credentials.
      * @returns {Promise} The promise contains a string that is the token for further validation
      */
@@ -89,7 +89,7 @@ class Login extends Component {
                 return Promise.resolve(data.login)
             }
         })
-        .catch(error => console.log("There was an error retreving data from the server", error))
+        .catch(error => console.log("There was an error retrieving data from the server", error))
     }
 
     /**

@@ -58,13 +58,14 @@ class Employee extends Component {
     }
 
     render(){
+        console.log(this.props)
         return (
             <div>
                 <Navigation />
                 <div className="view-container">
                     <div className='container-fluid' id='home-container'>
                         <div className='flex-row pt-1'>
-                            <ViewNavigation />
+                            <ViewNavigation roles={this.props.rest.roles} />
                         </div>
                         <div className='flex-row mt-3'>
                             <Toolbar />
