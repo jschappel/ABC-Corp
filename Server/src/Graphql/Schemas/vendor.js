@@ -4,8 +4,8 @@ module.exports = gql`
     """A vendor is a business that ABC Corp has bought/leased items from"""
     type Vendor implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         name: String!
         phone_number: String!
         email: String!

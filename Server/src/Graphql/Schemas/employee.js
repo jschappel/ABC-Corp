@@ -5,8 +5,8 @@ module.exports = gql`
 
     type Employee implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         first_name: String!
         last_name: String!
         phone_number: String!,

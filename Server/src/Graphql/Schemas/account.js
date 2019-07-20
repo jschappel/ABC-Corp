@@ -4,8 +4,8 @@ module.exports = gql`
     """A Account holds the account details of every ABC Corp employee"""
     type Account implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         username: String!
         password: String!
         role: Role!

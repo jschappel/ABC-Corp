@@ -4,8 +4,8 @@ module.exports = gql`
     """A role defines the permissions that are available to an ABC Corp account"""
     type Role implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         role: String!
         create: Boolean!
         read: Boolean!

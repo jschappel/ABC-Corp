@@ -4,8 +4,8 @@ module.exports = gql`
     """A office is a building owned by ABC Corp"""
     type Office implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         office: String!
         phone_number: String!
         service_number: String!

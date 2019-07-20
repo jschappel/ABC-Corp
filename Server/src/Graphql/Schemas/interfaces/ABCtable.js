@@ -4,7 +4,7 @@ module.exports = gql`
 
 interface ABCtable{
     id: ID!
-    date_created: String!
-    last_update: String!
+    date_created: Date!
+    last_update: Date!
 }
 `

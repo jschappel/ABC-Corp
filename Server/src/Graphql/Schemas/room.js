@@ -4,8 +4,8 @@ module.exports = gql`
     """A Room represents a room inside an ABC Corp office"""
     type Room implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         room: String!
         floor: Int!
         active: Boolean!

@@ -4,8 +4,8 @@ module.exports = gql`
     """A model is a particular design or version of a product"""
     type Model implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         model_name: String!
         model_number: String!
         category: Category!

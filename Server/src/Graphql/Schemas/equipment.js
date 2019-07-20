@@ -4,8 +4,8 @@ module.exports = gql`
     """A piece of equipment is an item owner or leased by ABC Corp"""
     type Equipment implements ABCtable {
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         serial_number: String!
         active: Boolean!
         warranty_end_date: Date

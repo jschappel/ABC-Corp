@@ -4,8 +4,8 @@ module.exports = gql`
     """A category is a class or division of equipment"""
     type Category implements ABCtable{
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         category: String!
         models:[Model!]
     }

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import Loading from '../Utils/loading'
+import DateFormat from '../Utils/formatter'
 
 class EquipmentModal extends Component {
     
@@ -119,10 +120,9 @@ const equipmentFetch = (id) => {
  * @param {Object} props The props to pass to the component
  */
 const modalBody = ({data}) => {
-    console.log(data)
     return(
         <Fragment>
-            <h5>Item Specifics</h5>
+            <h5 className="mt-2"><u>Item Specifics</u></h5>
             <div className='row'>
                 <div className='col-sm-12'>
                     <p>-  Model Number: <strong>{data.model_number}</strong></p>
@@ -135,11 +135,11 @@ const modalBody = ({data}) => {
             </div>
             <div className='row'>
                 <div className='col-sm-12'>
-                    <p>-  Warranty End Data: <strong>{data.warranty_end}</strong></p>
+                    <p>-  Warranty End Data: <strong>{new DateFormat(data.warranty_end).toLongString()}</strong></p>
                 </div>
             </div>
 
-            <h6>Location Information</h6>
+            <h5 className='mt-2'><u>Location Information</u></h5>
             <div className='row'>
                 <div className='col-sm-12'>
                     <p>-  Office Name: <strong>{data.office_name}</strong></p>
@@ -154,7 +154,7 @@ const modalBody = ({data}) => {
                 </div>
             </div>
 
-            <h6>Lease Information</h6>
+            <h5 className="mt-2"><u>Lease Information</u></h5>
             <div className='row'>
                 <div className='col-sm-12'>
                     <p>-  Leased From: <strong>{data.vendor_name}</strong></p>
@@ -162,12 +162,12 @@ const modalBody = ({data}) => {
             </div>
             <div className='row'>
                 <div className='col-sm-12'>
-                    <p>-  Lease Start Date: <strong>{data.lease_start}</strong></p>
+                    <p>-  Lease Start Date: <strong>{new DateFormat(data.lease_start).toLongString()}</strong></p>
                 </div>
             </div>
             <div className='row'>
                 <div className='col-sm-12'>
-                    <p>-  Lease End Date: <strong>{data.lease_end}</strong></p>
+                    <p>-  Lease End Date: <strong>{new DateFormat(data.lease_end).toLongString()}</strong></p>
                 </div>
             </div>    
         </Fragment>

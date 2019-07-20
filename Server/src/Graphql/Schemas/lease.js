@@ -4,8 +4,8 @@ module.exports = gql`
 """A lease is a contract from a vendor providing equipment to ABC Corp for a limited time """
     type Lease implements ABCtable{
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         lease_start: Date!
         lease_end: Date!
         vendor: Vendor!

@@ -3,8 +3,8 @@ const { gql} = require('apollo-server-express')
 module.exports = gql`
     type Address implements ABCtable{
         id: ID!
-        date_created: String!
-        last_update: String!
+        date_created: Date!
+        last_update: Date!
         address1: String!
         address2: String
         district: String!
