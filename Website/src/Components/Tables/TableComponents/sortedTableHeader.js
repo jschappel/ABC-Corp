@@ -37,7 +37,8 @@ class sortedTableHeader extends Component {
      * @returns{Integer} -1 if second element goes before first, 1 if first element goes before second, 0
      *      if both elements are the same.
      */
-    compareObjects(key, order) {
+    compareObjects(
+        key, order) {
         return function(a, b) {
             // Both objects do not have the same key so exit
             if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) return 0

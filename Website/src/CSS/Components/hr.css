@@ -1,0 +1,12 @@
+.custom-line {
+    border-top: 1px solid #60b0f4;
+    width: 90%;
+}
+
+#blue-modal-header {
+    border-bottom: 1px solid #60b0f4;
+}
+
+#section-header {
+    border-bottom: 1px solid #60b0f4;
+}

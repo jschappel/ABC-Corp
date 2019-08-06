@@ -46,9 +46,9 @@ class CheckedRow extends Component {
 
     render() {
         return(
-            <tr className={this.state.active ? "table-active" : ""}>
+            <tr className={this.state.active ? "table-active" : ""} id={this.props.data.id} onClick={ (event) => this.props.onClick(event) }>
                 <td>
-                    <input className="position-static" type="checkbox" onClick={this.handleClick}/>
+                    <input className="position-static" type="checkbox"/>
                 </td>
                 {
                     this.rowCreate(this.props.data)

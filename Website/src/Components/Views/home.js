@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import Navigation from '../Navbars/account_navigation'
 import ViewNavigation from '../Navbars/view_navigation'
 import '../../CSS/container.css'
 import Loading from '../Utils/loading'
-import EquipmentTable from '../Tables/employeeEquipment'
+import EquipmentTable from '../Tables/home_Equipment'
 import WelcomeMessage from '../Other/welcome'
 
 
@@ -59,7 +59,9 @@ class Home extends Component {
                 isLoading: false
             })
         })
-        .catch(error => console.log('Error fetching the data', error))
+        .catch(error =>  {
+            this.setState({isLoaded: false})
+            console.log('Error fetching the data', error)})
     }
 
     /**
@@ -87,7 +89,6 @@ class Home extends Component {
     }
     
     render(){
-        console.log(this.props.rest.roles)
         return (
             <div>
                 <Navigation />
@@ -103,11 +104,6 @@ class Home extends Component {
         )
     }
 }
-
-
-
-
-
 
 
 // Query to get users equipment data

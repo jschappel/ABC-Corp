@@ -44,7 +44,7 @@ async function getEmployee(id) {
  */
 async function getEmployees() {
     try{
-        const sql = `SELECT * FROM employee`
+        const sql = `SELECT * FROM employee ORDER BY last_name DESC`
         const resultArray = await AuxQueries.selectQuery(connection, sql, [])
         return resultArray.map( obj => {
             return {
@@ -76,7 +76,7 @@ async function getEmployees() {
  */
 async function getEmployeesByStatus(status) {
     try{
-        const sql = `SELECT * FROM employee WHERE active = ${status === true ? 1 : 0}`
+        const sql = `SELECT * FROM employee WHERE active = ${status === true ? 1 : 0} ORDER BY last_name DESC`
         const resultArray = await AuxQueries.selectQuery(connection, sql, [])
         return resultArray.map( obj => {
             return {

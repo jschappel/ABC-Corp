@@ -2,10 +2,6 @@ const monthArray = ["January", "February", "March", "April", "May", "June", "Jul
 
 class DateFormat extends Date {
 
-    constructor(date){
-        super(date)
-    }
-
     /**
      * toLongString: Converts a UTC Date into: Month Day, Year
      * Month is fully spelled out.

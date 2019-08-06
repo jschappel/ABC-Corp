@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import DefaultRow from './TableComponents/defaultRow'
 import SortHeader from './TableComponents/sortedTableHeader'
-import EquipmentModal from '../Modals/home_equipment'
+import EquipmentModal from '../Modals/homeEquipment'
 
 class EquipmentTable extends Component{
 
@@ -114,7 +114,7 @@ class EquipmentTable extends Component{
  * @param {Component} Component The component that you wish to apply the function to
  */
 const withNullData = (Component) => (props) =>{
-    return props.data ? <Component {...props} /> : <p>Sorry you do not own any equipment yet</p>
+    return props.data ? <Component {...props} /> : <p>No Employees Exist!</p>
 }
 
 export default withNullData(EquipmentTable)
