@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Navigation from '../Navbars/account_navigation'
 import ViewNavigation from '../Navbars/view_navigation'
 import '../../CSS/container.css'
@@ -78,12 +78,16 @@ class Home extends Component {
         }
         else {
             return(
+                <Fragment>
                 <div className='row justify-content-center mt-3 pr-1'>
                     <WelcomeMessage firstName={this.state.firstName}/>
+                </div>
+                <div className='row justify-content-center mt-3 pr-1'>
                     <EquipmentTable
                         data={this.state.equipmentArray}
                     />
                 </div>
+                </Fragment>
             )
         }
     }

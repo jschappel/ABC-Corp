@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import GoogleMapContainer from '../Utils/map'
 import { APIKEY } from '../Utils/map'
 import '../../CSS/Components/hr.css'
+import { phoneNumberFormatter } from '../Utils/helpers'
 
 
 class inDepthEmployee extends Component {
@@ -118,12 +119,12 @@ const modalBody = ( props ) => {
               <DataComponent title='Email:' body={data.email} />
             </div>
             <div className='col-sm-5'>
-              <DataComponent title='Phone Number:' body={data.phone_number} />
+              <DataComponent title='Phone Number:' body={ phoneNumberFormatter(data.phone_number) } />
             </div>
           </div>
           <div className='row justify-content-center mt-3'>
             <div className='col-sm-5'>
-              <DataComponent title='Work Phone:' body={data.work_phone_number} />
+              <DataComponent title='Work Phone:' body={phoneNumberFormatter(data.work_phone_number)} />
             </div>
           </div>
 
@@ -162,7 +163,7 @@ const modalBody = ( props ) => {
               />
             </div>
             <div className='col-sm-5'>
-              <DataComponent title='Office Phone' body={data.office.phone_number} />
+              <DataComponent title='Office Phone' body={phoneNumberFormatter(data.office.phone_number)} />
             </div>
           </div>
           <div className='row ml-3 mt-5'> 
