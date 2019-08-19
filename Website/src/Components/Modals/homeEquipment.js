@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import Loading from '../Utils/loading'
 import DateFormat from '../Utils/formatter'
+import { DataComponent, AddressComponent } from './modalParts'
+import '../../CSS/Components/hr.css'
+
 
 class EquipmentModal extends Component {
     
@@ -62,9 +65,9 @@ class EquipmentModal extends Component {
                 aria-label="exampleModalLabel"
                 aria-hidden="true"
             >
-                <div className="modal-dialog modal-dialog-centered modal-md" role="document">
+                <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div className="modal-content">
-                        <div className="modal-header">
+                        <div className="modal-header id='blue-modal-header'">
                             <h4 className="modal-title" id="exampleModalLabel">{this.state.modal_title}</h4>
                             <button type="button" className="close" onClick={() => this.props.toggleModal()} aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -108,6 +111,18 @@ const equipmentFetch = (id) => {
                 floor
                 office {
                   office
+                  phone_number
+                  address {
+                    address1
+                    address2
+                    postal_code
+                    city {
+                      city
+                      country {
+                        country
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -122,22 +137,22 @@ const equipmentFetch = (id) => {
 const modalBody = ({data}) => {
     return(
         <Fragment>
-            <h5 className="mt-2"><u>Item Specifics</u></h5>
-            <div className='row'>
-                <div className='col-sm-12'>
-                    <p>-  Model Number: <strong>{data.model_number}</strong></p>
+            <h5 className="d-inline-flex mt-2 font-weight-normal">Item Specifics</h5>
+            <div className='row justify-content-center mt-3'>
+                <div className='col-sm-5'>
+                    <DataComponent title='Model Number:' body={data.model_number} />
+                </div>
+                <div className='col-sm-5'>
+                    <DataComponent title='Serial Number:' body={data.serial_number} />
                 </div>
             </div>
-            <div className='row'>
-                <div className='col-sm-12'>
-                    <p>-  Serial Number: <strong>{data.serial_number}</strong></p>
+            <div className='row justify-content-center mt-3'>
+                <div className='col-sm-5'>
+                    <DataComponent title='Warranty End Date:' body={new DateFormat(data.warranty_end).toLongString()} />
                 </div>
             </div>
-            <div className='row'>
-                <div className='col-sm-12'>
-                    <p>-  Warranty End Data: <strong>{new DateFormat(data.warranty_end).toLongString()}</strong></p>
-                </div>
-            </div>
+
+
 
             <h5 className='mt-2'><u>Location Information</u></h5>
             <div className='row'>
