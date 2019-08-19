@@ -164,7 +164,7 @@ const modalBody = ( props ) => {
               />
             </div>
             <div className='col-sm-5'>
-              <DataComponent title='Office Phone' body={phoneNumberFormatter(data.office.phone_number)} />
+              <DataComponent title='Office Phone:' body={phoneNumberFormatter(data.office.phone_number)} />
             </div>
           </div>
           <div className='row ml-3 mt-5'> 

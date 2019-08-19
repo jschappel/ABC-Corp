@@ -1,5 +1,5 @@
 import React from 'react'
-
+import DateFormatter from '../Utils/formatter'
 
 /**
  * DataComponent: A component to display form data
@@ -7,9 +7,9 @@ import React from 'react'
  */
 export const DataComponent = (props) => {
     return(
-      <div className='row'>
+      <div className='row justify-content-center'>
         <dt className="d-flex text-muted font-weight-normal">{props.title}</dt>
-        <dd className="d-flex text-center font-weight-normal ml-5" >{props.body}</dd>
+        <dd className="d-flex text-center font-weight-normal ml-3">{props.body}</dd>
         <div className='custom-line' />
       </div>
     )
@@ -30,4 +30,43 @@ export const DataComponent = (props) => {
         <div className='custom-line' />
       </div>
     )
+}
+
+/**
+ * LeaseComponent: A component to display form data
+ * @param {title, body, formatString} props where body is a {Javascript UTC Date Object}
+ */
+export const LeaseComponent = (props) => {
+  const expired =  Date.now() < props.body ? false : true
+  return(
+    <div className='row justify-content-center'>
+        <dt className="d-flex text-muted font-weight-normal">{props.title}</dt>
+        {
+          props.formatString ? 
+            <dd className="d-flex text-center font-weight-normal ml-3" style={expired ? {color:"red"} : {color:"green"}}>{new DateFormatter(props.body).toLongString()}</dd>
+            :
+            <dd className="d-flex text-center font-weight-normal ml-3">{new DateFormatter(props.body).toLongString()}</dd>
+        }
+        <div className='custom-line' />
+      </div>
+  )
+}
+
+
+/**
+ * A HOC for a Lease Component to check if the lease exists
+ * @param {LeaseComponent} Component 
+ */
+export const withLeaseComponent = (Component) => (props) => {
+  if (props.body === null) {
+    return(
+      <div className='row justify-content-center'>
+        <dt className="d-flex text-muted font-weight-normal">{props.title}</dt>
+        <dd className="d-flex text-center font-weight-normal ml-3">Not Applicable</dd>
+        <div className='custom-line' />
+      </div>
+    )
+  } else {
+    return (<Component {...props}/>)
+  }
 }

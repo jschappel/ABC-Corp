@@ -6,7 +6,8 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 // Import the fontAwesome icons
-import { faUser, faBuilding, faHome, faLock, faCoffee, faHeart, faUserPlus, faTrashAlt, faSort, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faBuilding, faHome, faLock, faCoffee, faHeart, faUserPlus, faTrashAlt, faSort, faEdit, 
+  faClipboard, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 // Add the Icons to the Library so they can be used in multiple components
@@ -21,5 +22,7 @@ library.add(
   faSort,
   faHome,
   faBuilding,
-  faEdit
+  faEdit,
+  faClipboard,
+  faShoppingCart,
 )
