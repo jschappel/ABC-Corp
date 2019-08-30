@@ -36,7 +36,7 @@ export const DataComponent = (props) => {
  * LeaseComponent: A component to display form data
  * @param {title, body, formatString} props where body is a {Javascript UTC Date Object}
  */
-export const LeaseComponent = (props) => {
+const LeaseComponent = (props) => {
   const expired =  Date.now() < props.body ? false : true
   return(
     <div className='row justify-content-center'>
@@ -57,7 +57,7 @@ export const LeaseComponent = (props) => {
  * A HOC for a Lease Component to check if the lease exists
  * @param {LeaseComponent} Component 
  */
-export const withLeaseComponent = (Component) => (props) => {
+const withLeaseComponent = (Component) => (props) => {
   if (props.body === null) {
     return(
       <div className='row justify-content-center'>
@@ -70,3 +70,5 @@ export const withLeaseComponent = (Component) => (props) => {
     return (<Component {...props}/>)
   }
 }
+
+export const LeaseDisplay = withLeaseComponent(LeaseComponent)

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Loading from '../Utils/loading'
 import DateFormat from '../Utils/formatter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DataComponent, AddressComponent, withLeaseComponent, LeaseComponent } from './modalParts'
+import { DataComponent, AddressComponent, LeaseDisplay } from './modalParts'
 import '../../CSS/Components/hr.css'
 
 
@@ -53,7 +53,6 @@ class EquipmentModal extends Component {
         .then( results => results.json())
         .then( ({data}) => {
             const tableData = data.equipmentSingle
-            console.log(tableData)
             this.setState({
                 isLoading: false,
                 modal_title: tableData.model.model_name,
@@ -90,7 +89,7 @@ class EquipmentModal extends Component {
             >
                 <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div className="modal-content">
-                        <div className="modal-header id='blue-modal-header'">
+                        <div className="modal-header" id='blue-modal-header'>
                             <h4 className="modal-title" id="exampleModalLabel">{this.state.modal_title}</h4>
                             <button type="button" className="close" onClick={() => this.props.toggleModal()} aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -160,7 +159,7 @@ const equipmentFetch = (id) => {
  * @param {Object} props The props to pass to the component
  */
 const modalBody = ({data}) => {
-    //withLeaseComponent(<LeaseComponent title='Lease Start:' formatString={false} body={new Date(data.lease_start)} />)
+    
     return(
         <Fragment>
             <h5 className="d-inline-flex mt-2 font-weight-normal">Item Specifics  {<FontAwesomeIcon icon={'user'} size='sm' transform="right-4 down-2" />}</h5>
@@ -219,13 +218,13 @@ const modalBody = ({data}) => {
             </div>
             <div className='row justify-content-center mt-3'>
                 <div className='col-sm-5'>
-                    {withLeaseComponent(<LeaseComponent title='Lease Start:' formatString={false} body={new Date(data.lease_start)} />)}
+                    <LeaseDisplay title='Lease Start:' formatString={false} body={new Date(data.lease_start)}/>
                 </div>
                 <div className='col-sm-5'>
-                    <LeaseComponent title='Lease End:' formatString={true} body={new Date(data.lease_end)} />
+                    <LeaseDisplay title='Lease End:' formatString={true} body={new Date(data.lease_end)} />
                 </div>
             </div>
-            <div className='row justify-content-center mt-3'>
+            <div className='row justify-content-center mt-3 mb-5'>
                 <div className='col-sm-5'>
                     <DataComponent title='Warranty End Date:' body={new DateFormat(data.warranty_end).toLongString()} />
                 </div>

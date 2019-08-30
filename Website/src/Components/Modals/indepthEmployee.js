@@ -30,6 +30,8 @@ class inDepthEmployee extends Component {
         //FontAwesome Icons
         this.userIcon = <FontAwesomeIcon icon={'user'} />
         this.editIcon = <FontAwesomeIcon icon={'edit'} />
+
+        this.handleDeepChange = this.handleDeepChange.bind(this)
     }
 
     componentDidMount() {
@@ -65,6 +67,28 @@ class inDepthEmployee extends Component {
           console.log('There was an error fetching the modal data', error)
         })
     }
+    
+    /**
+     * renderBody: determines if the edit body of view body should be returned
+     */
+    renderBody() {
+      if(this.state.editMode) {
+        return <EditBody data={this.state.data} handler={this.handleDeepChange} onSubmit={() => this.setState({editMode: false})} />
+      } else{
+        return <ModalBody loading={this.state.isLoading} data={this.state.data} geoLoc={this.state.geoLocation} roles={this.props.roles} edit={() => this.setState({editMode: true})}/>
+      }
+    }
+
+    handleDeepChange(event){
+      event.persist()
+      const objKey = event.target.name
+      this.setState( prevState => ({
+        data: {
+          ...prevState.data,
+          [objKey]: event.target.value
+        }
+      }))
+    }
 
     render() {
         return(
@@ -85,7 +109,7 @@ class inDepthEmployee extends Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                          <ModalBody loading={this.state.isLoading} data={this.state.data} geoLoc={this.state.geoLocation} roles={this.props.roles} edit={() => console.log('Time to edit')}/>
+                          {this.renderBody()}
                         </div>
                     </div>
                 </div>
@@ -173,6 +197,82 @@ const modalBody = ( props ) => {
       </Fragment>
   )
 }
+
+
+
+const EditBody = ({data, handler, ...rest}) => {
+
+  return(
+    <Fragment>
+      <form className="needs-validation" onSubmit={rest.onSubmit}>
+      <h5 className="d-inline-flex mt-2 font-weight-normal">Personal Information{<FontAwesomeIcon icon={'user'} size='sm' transform="right-4 down-2" />}</h5>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label>First Name</label>
+            <input type="text" className="form-control" name="first_name" value={data.first_name} onChange={(event) => handler(event)}/>
+          </div>
+          <div className="form-group col-md-6">
+            <label>Last Name</label>
+            <input type="text" className="form-control" name="last_name" value={data.last_name} onChange={(event) => handler(event)}/>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label>Email</label>
+            <input type="email" className="form-control" value={data.email} name="email" onChange={(event) => handler(event)}/>
+          </div>
+          <div className="form-group col-md-3">
+            <label>Home Phone</label>
+            <input type="tel" className="form-control" value={phoneNumberFormatter(data.phone_number)} name="phone_number" onChange={(event) => handler(event)}/>
+          </div>
+          <div className="form-group col-md-3">
+            <label>Work Phone</label>
+            <input type="tel" className="form-control" value={phoneNumberFormatter(data.work_phone_number)} placeholder="111 111 1111"/>
+          </div>
+        </div>
+
+
+        <h5 className="d-inline-flex mt-4 font-weight-normal">Location Information  {<FontAwesomeIcon icon={'home'} size='sm' transform="right-4 down-2" />}</h5>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label>Main Address</label>
+            <input type="text" className="form-control" placeholder={data.office.address.address1}/>
+          </div>
+          <div className="form-group col-md-5">
+            <label>Secondary Address</label>
+            <input type="text" className="form-control" placeholder={data.office.address.address2 === null ? "Apartment, studio, or floor" : data.office.address.address2}/>
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Address 2</label>
+          <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
+        </div>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label>City</label>
+            <input type="text" className="form-control" id="inputCity"/>
+          </div>
+          <div className="form-group col-md-4">
+            <label>State</label>
+            <select id="inputState" className="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div className="form-group col-md-2">
+            <label>Zip</label>
+            <input type="text" className="form-control" id="inputZip"/>
+          </div>
+        </div>
+        <button type="submit" className="btn btn-success">Update</button>
+      </form>      
+    </Fragment>
+  )
+}
+
+
+
+
 
 /**
  * editButton: Stateless component that renders the edit button
